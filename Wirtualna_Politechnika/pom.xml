@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.wirt_pol</groupId>
-    <artifactId>Wirtualna_Politechnika_Back</artifactId>
+    <artifactId>Wirtualna_Politechnika</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Wirtualna_Politechnika_Back</name>
-    <description>Wirtualna_Politechnika_Back</description>
+    <name>Wirtualna_Politechnika</name>
+    <description>Wirtualna_Politechnika</description>
     <properties>
         <java.version>17</java.version>
     </properties>
