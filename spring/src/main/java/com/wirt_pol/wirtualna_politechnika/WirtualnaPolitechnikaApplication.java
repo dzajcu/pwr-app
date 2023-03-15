@@ -16,5 +16,4 @@ public class WirtualnaPolitechnikaApplication {
     public String hello_world(){
         return "Hello World!";
     }
-
 }
