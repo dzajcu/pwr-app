@@ -13,6 +13,37 @@ body {
   background-color: #3f3f3f;
   color: white;
   text-align: center;
-  text-transform: uppercase;
 }
 
+.App {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.auth-form-container, .login-form, .register-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+label{
+  text-align: left;
+  padding: 0.25rem 0;
+}
+input {
+  margin: 0.5rem 0;
+  text-align: center;
+}
+button {
+  border: none;
+  margin: 0.5rem 0;
+  cursor: pointer;
+}
+
+.linking {
+  background: none;
+  color: white;
+  text-decoration: underline;
+}
