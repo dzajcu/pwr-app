@@ -4,7 +4,7 @@ import com.wirt_pol.wirtualna_politechnika.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 @CrossOrigin
@@ -22,6 +22,16 @@ public class UserController {
     @GetMapping("/users")
     public List<User> fetchUserList(){
         return userService.fetchUserList();
+    }
+
+    @GetMapping("/users/{id}")
+    public ResponseEntity<User> fetchUserById(@PathVariable Long id) {
+        User user = userService.fetchUserById(id);
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PutMapping("/users/{id}")

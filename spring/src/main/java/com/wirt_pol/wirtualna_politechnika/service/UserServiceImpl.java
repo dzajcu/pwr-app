@@ -1,5 +1,5 @@
 package com.wirt_pol.wirtualna_politechnika.service;
-
+import java.util.Optional;
 import com.wirt_pol.wirtualna_politechnika.entity.User;
 import com.wirt_pol.wirtualna_politechnika.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +21,15 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<User> fetchUserList(){
         return (List<User>) userRepository.findAll();
+    }
+
+    @Override
+    public User fetchUserById(Long userId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent()) {
+            return optionalUser.get();
+        }
+        return null;
     }
 
     @Override

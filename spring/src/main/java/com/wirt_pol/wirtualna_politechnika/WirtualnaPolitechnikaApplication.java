@@ -12,7 +12,7 @@ public class WirtualnaPolitechnikaApplication {
     public static void main(String[] args) {
         SpringApplication.run(WirtualnaPolitechnikaApplication.class, args);
     }
-    @GetMapping("/hello")
+    @GetMapping("/")
     public String hello_world(){
         return "Hello World!";
     }

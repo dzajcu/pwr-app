@@ -6,6 +6,7 @@ import java.util.List;
 public interface UserService {
     User saveUser(User user);
     List<User> fetchUserList();
+    User fetchUserById(Long userId);
     User updateUser(User user, Long userId);
     void deleteUserById(Long UserId);
 
