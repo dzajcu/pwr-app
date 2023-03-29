@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class WirtualnaPolitechnikaApplication {
 
-   public static void main(String[] args) {
+    public static void main(String[] args) {
         SpringApplication.run(WirtualnaPolitechnikaApplication.class, args);
     }
-    @GetMapping("/")
+    @GetMapping("/hello")
     public String hello_world(){
         return "Hello World!";
     }
