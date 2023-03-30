@@ -1,6 +1,10 @@
 package com.wirt_pol.wirtualna_politechnika.service;
+import java.nio.file.ProviderNotFoundException;
 import java.util.Optional;
+
+import com.wirt_pol.wirtualna_politechnika.entity.Role;
 import com.wirt_pol.wirtualna_politechnika.entity.User;
+import com.wirt_pol.wirtualna_politechnika.repository.RoleRepository;
 import com.wirt_pol.wirtualna_politechnika.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +16,8 @@ import java.util.Objects;
 public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Override
     public User saveUser(User user){
@@ -26,10 +32,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public User fetchUserById(Long userId) {
         Optional<User> optionalUser = userRepository.findById(userId);
-        if (optionalUser.isPresent()) {
-            return optionalUser.get();
-        }
-        return null;
+        return optionalUser.orElse(null);
     }
 
     @Override
@@ -62,7 +65,16 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void deleteUserById(Long Id){
-        userRepository.deleteById(Id);
+    public void deleteUserById(Long Id){userRepository.deleteById(Id);}
+
+    @Override
+    public void assignRoleToUser(Long userId, Long roleId){
+        User user = userRepository.findById(userId).orElse(null);
+        Role role = roleRepository.findById(roleId).orElse(null);
+        assert user != null;
+        user.setRole(role);
+        role.getUsersList().add(user);
+        userRepository.save(user);
+        roleRepository.save(role);
     }
 }
