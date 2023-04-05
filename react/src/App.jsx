@@ -1,5 +1,6 @@
-import {Register} from "./Register";
-import {Login} from "./Login";
+import {Register} from "./components/Register";
+import {Login} from "./components/Login";
+import {Header} from "./components/Header";
 import React, {useState} from "react";
 
 function App() {
@@ -10,10 +11,12 @@ function App() {
     }
   return (
     <div className="App">
-        {
+         {
             //Displays current form
             currentForm === "login" ? <Login onFormSwitch={toogleForm}/> : <Register onFormSwitch={toogleForm}/>
-        }
+
+        } 
+        
     </div>
   );
 }

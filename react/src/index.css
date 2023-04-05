@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Josefin+Sans&family=Open+Sans&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+    position: relative;
+}
+
+html,
+body {
+    min-height: 100%;
+    font-family: 'Open Sans', sans-serif;
+    background-image: linear-gradient(to left, #830053 0%, #5d09cc 100%);
+    color: white;
+    overflow: hidden;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    user-select: none;
+}
+
+input,
+button {
+    font: inherit; /* by default input elements won't inherit font 
+                    from its parent */
+    border: 0;
+    background: transparent;
+    color: white;
+}
+button {
+    cursor: pointer;
+}
+
