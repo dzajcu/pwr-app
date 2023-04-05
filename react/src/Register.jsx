@@ -8,9 +8,6 @@ export const Register = (props) => {
         //Prevents page refresh
         e.preventDefault();
         //Prints data
-        console.log(email);
-        console.log(username);
-        console.log(password);
 
         fetch("http://localhost:8080/users", {
             method: "POST",
