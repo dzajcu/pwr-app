@@ -1,5 +1,7 @@
 package com.wirt_pol.wirtualna_politechnika.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,6 +24,7 @@ public class Role {
     private String role;
 
     @OneToMany(mappedBy = "role")
+    @JsonManagedReference
     private List<User> usersList;
 
 }

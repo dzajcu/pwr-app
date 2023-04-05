@@ -1,7 +1,10 @@
 package com.wirt_pol.wirtualna_politechnika.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -24,6 +27,11 @@ public class User {
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id", referencedColumnName = "id")
+    @JsonBackReference
     private Role role;
+
+    @OneToMany (mappedBy = "author")
+    @JsonManagedReference
+    private List<Content> userPosts;
 
 }
