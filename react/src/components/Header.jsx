@@ -3,6 +3,7 @@ import styles from "./styles/css/Header.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../public/logo.png";
+import { HeaderBtn } from "./HeaderBtn";
 
 export const Header = () => {
     return (
@@ -12,36 +13,20 @@ export const Header = () => {
                 <div className={styles.text}>
                     <p className={styles.hasz}>#pwrapp</p>
                     <h1 className={styles.title}>
-                        Wirtualna
-                        <br />
-                        Politechnika
+                        Wirtualna <br /> Politechnika
                     </h1>
                 </div>
 
                 <div className={styles.buttons}>
-                    <button className={`${styles.btn} ${styles.login}`}>
-                        <p>Zaloguj się</p>
-                        <FontAwesomeIcon
-                            className={styles.arrow}
-                            icon={faArrowRight}
-                        />
-                    </button>
-
-                    <button className={`${styles.btn} ${styles.register}`}>
-                        <p className={styles.buttons}>Zarejestruj się</p>
-                        <FontAwesomeIcon
-                            className={styles.arrow}
-                            icon={faArrowRight}
-                        />
-                    </button>
-
-                    <button className={`${styles.btn} ${styles.guest}`}>
-                        <p className={styles.buttons}>Kontynuuj<br />jako gość</p>
-                        <FontAwesomeIcon
-                            className={styles.arrow}
-                            icon={faArrowRight}
-                        />
-                    </button>
+                    <HeaderBtn text="Zaloguj się" style={styles["login"]} />
+                    <HeaderBtn
+                        text="Zarejestruj się"
+                        style={styles["register"]}
+                    />
+                    <HeaderBtn
+                        text="Kontynuuj jako gość"
+                        style={styles["guest"]}
+                    />
                 </div>
             </div>
         </div>

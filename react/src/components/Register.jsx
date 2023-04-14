@@ -10,7 +10,6 @@ export const Register = (props) => {
     const [passwordValidated, setPasswordValidated] = useState("");
     //Functionality after submitting
     const handleSubmit = (e) => {
-
         e.preventDefault();
         fetch("http://localhost:8080/users", {
             method: "POST",
@@ -39,7 +38,6 @@ export const Register = (props) => {
                 );
             });
 
-
         setEmail("");
         setUsername("");
         setPassword("");
@@ -50,7 +48,7 @@ export const Register = (props) => {
             <div className={styles.overlay}>
                 <img className={styles.logo} src={logo} alt="logo pwr" />
             </div>
-            <div className={styles.container}>
+            <div className={`${styles.container} ${styles.container_bg}`}>
                 <h3 className={styles.title}>Wirtualna Politechnika</h3>
                 <p className={styles.text_bigger}>
                     Zarejestruj się, aby kontynuować.
@@ -78,7 +76,9 @@ export const Register = (props) => {
                         className={`${styles.text_smaller} ${styles.box} ${styles.inputbox}`}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        type="text"
+                        type="email"
+                        name="email"
+                        autocomplete="email"
                         placeholder="Adres e-mail"
                     />
                     <p
@@ -92,6 +92,7 @@ export const Register = (props) => {
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         type="text"
+                        name="username"
                         placeholder="Nazwa użytkownika"
                     />
                     <p
@@ -104,7 +105,7 @@ export const Register = (props) => {
                         className={`${styles.text_smaller} ${styles.box} ${styles.inputbox}`}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        type="text"
+                        type="password"
                         placeholder="Hasło"
                     />
                     <p
@@ -117,7 +118,7 @@ export const Register = (props) => {
                         className={`${styles.text_smaller} ${styles.box} ${styles.inputbox}`}
                         value={passwordValidated}
                         onChange={(e) => setPasswordValidated(e.target.value)}
-                        type="text"
+                        type="password"
                         placeholder="Powtórz hasło"
                     />
 

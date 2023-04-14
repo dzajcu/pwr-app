@@ -2,27 +2,24 @@
     position: relative;
 
     z-index: 2;
-    background-image: url('../../../public/background-gradient.jpg');
+    background-image: url("../../../public/background-gradient.jpg");
 }
 .bg {
-	background: linear-gradient(-45deg, #ee7752, #e73c7e, #bc12ff, #4923d5);
-	background-size: 400% 400%;
-	animation: gradient 15s ease infinite;
-	height: 100vh;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #bc12ff, #4923d5);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    height: 100vh;
     // background-image: url('../../../public/grid.png');
-
 }
-
 
 .logo {
     position: absolute;
     z-index: -1;
-    top: 10%;
-    left: 20%;
-    filter: sepia(80%) contrast(120%) brightness(90%) grayscale(20%);
-
-    opacity: 0.07;
-    width: 70rem;
+    top: 50%;
+    left: 40%;
+    translate: (-50% -50%);
+    opacity: 0.12;
+    width: 90vh;
 }
 
 .container {
@@ -40,8 +37,6 @@
             color: black;
             font-size: 6rem;
             text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
-            
-
         }
         .title {
             font-size: 11rem;
@@ -71,7 +66,7 @@
         background-color: rgba(0, 0, 0, 0.2);
         padding: 2.4rem 3rem;
         font-size: 1.8em;
-
+        width: 150px;
         .arrow {
             font-size: 2rem;
         }
@@ -100,22 +95,20 @@
 .btn:hover .arrow {
     transform: rotate(45deg);
     transform: translate(2rem, 1rem);
-    
 }
 
 .btn:hover {
     scale: (1.03);
 }
 
-
 @keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }

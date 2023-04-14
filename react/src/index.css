@@ -15,11 +15,10 @@ html {
 
 html,
 body {
-    min-height: 100%;
+    /* min-height: 100%; */
     font-family: 'Open Sans', sans-serif;
-    background-image: linear-gradient(to left, #830053 0%, #5d09cc 100%);
+    background-image: linear-gradient(to left,#830053 0%, #5d09cc 100%);
     color: white;
-    overflow: hidden;
 }
 
 ul {

@@ -1,0 +1,38 @@
+
+.container {
+    // position: relative;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1400px;
+    color: black;
+    // height: 100vh;
+}
+
+section {
+    padding: 2rem 4rem;
+}
+
+.side {
+    position: sticky; /* dodaj pozycję sticky */
+    top: 0; /* ustaw pozycję */
+    overflow: hidden;
+    max-width: 20%;
+    width: 20%;
+    height: 100%;
+
+    width: 25%;
+    height: 50vh;
+    min-height: 200px;
+}
+
+.posts {
+    width: 60%;
+    border-left: 1px solid rgb(87, 87, 87);
+    border-right: 1px solid rgb(87, 87, 87);
+
+}
+
+
+
+

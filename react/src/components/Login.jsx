@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styles from "./styles/css/Login.module.css";
 import logo from "../../public/logo.png";
 import { FaGoogle } from "react-icons/fa";
-// import GoogleLogin from 'react-google-login';
 
 export const Login = (props) => {
     const [username, setUsername] = useState("");
@@ -10,6 +9,7 @@ export const Login = (props) => {
     //Functionality after submitting
     const handleSubmit = (e) => {
         e.preventDefault();
+
         fetch("http://localhost:8080/users", {
             method: "GET",
             headers: {
@@ -45,9 +45,8 @@ export const Login = (props) => {
 
     return (
         <div className={styles.bg}>
-            
             <img className={styles.logo} src={logo} alt="logo pwr" />
-            <div className={styles.container}>
+            <div className={`${styles.container} ${styles.container_bg}`}>
                 <h3 className={styles.title}>Wirtualna Politechnika</h3>
                 <p className={styles.text_bigger}>
                     Zaloguj się, aby kontynuować.
@@ -75,7 +74,7 @@ export const Login = (props) => {
                         className={`${styles.text_smaller} ${styles.box} ${styles.inputbox}`}
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        type="text"
+                        type="email"
                         placeholder="Adres e-mail lub nazwa użytkownika"
                     />
                     <p
@@ -88,7 +87,7 @@ export const Login = (props) => {
                         className={`${styles.text_smaller} ${styles.box} ${styles.inputbox}`}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        type="text"
+                        type="password"
                         placeholder="Hasło"
                     />
                     <button
