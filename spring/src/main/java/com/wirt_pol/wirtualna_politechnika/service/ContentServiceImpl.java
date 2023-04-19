@@ -5,6 +5,7 @@ import com.wirt_pol.wirtualna_politechnika.repository.ContentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +15,9 @@ public class ContentServiceImpl implements ContentService {
     private ContentRepository contentRepository;
 
     @Override
-    public Content createContent(Content content){return contentRepository.save(content);}
+    public Content createContent(Content content){
+        content.setCreationTime(LocalDateTime.now());
+        return contentRepository.save(content);}
 
     @Override
     public List<Content> fetchContentList(){return(List<Content>) contentRepository.findAll();}

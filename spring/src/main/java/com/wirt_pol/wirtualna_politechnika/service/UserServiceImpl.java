@@ -1,12 +1,10 @@
 package com.wirt_pol.wirtualna_politechnika.service;
-import java.nio.file.ProviderNotFoundException;
 import java.util.Optional;
-
 import com.wirt_pol.wirtualna_politechnika.entity.Role;
 import com.wirt_pol.wirtualna_politechnika.entity.User;
 import com.wirt_pol.wirtualna_politechnika.repository.RoleRepository;
 import com.wirt_pol.wirtualna_politechnika.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,10 +12,13 @@ import java.util.Objects;
 
 @Service
 public class UserServiceImpl implements UserService{
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private RoleRepository roleRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+    }
 
     @Override
     public User saveUser(User user){
@@ -35,40 +36,57 @@ public class UserServiceImpl implements UserService{
         return optionalUser.orElse(null);
     }
 
+    //Sprawdzenie czy 2 podane stringi są różne od siebie i czy 2 string nie jest pusty
+    public boolean stringNotEmptyOrEqual(String str1 , String str2){
+        return !(str1.equalsIgnoreCase(str2) && str2.equals(""));
+    }
+
+    //Funkcja zmiany nazwy użytkownika dla nowej nazwy użytkownika jeśli została ona zmieniona
+    public void changeUnIfNotEmpty(User oldUser, User newUser){
+        String oldUsername = oldUser.getUsername(), newUserName = newUser.getUsername();
+        if (stringNotEmptyOrEqual(oldUsername, newUserName)){
+            oldUser.setUsername(newUserName);}
+    }
+
+    //Funkcja zmiany maila użytkownika dla nowego maila jeśli został zmieniony
+    public void changeMailIfNotEmpty(User oldUser, User newUser)
+    {
+        String oldMail = oldUser.getEmail(), newMail = newUser.getEmail();
+        if(stringNotEmptyOrEqual(oldMail,newMail))
+            oldUser.setEmail(newMail);
+    }
+
+    //Funckja zmieniająca hasło użytkownika jeśli to zostało zmienione
+    public void changePasswIfNotEmpty(User oldUser, User newUser)
+    {
+        String oldPassw = oldUser.getPassword(), newPassw = newUser.getPassword();
+        if(stringNotEmptyOrEqual(oldPassw,newPassw))
+            oldUser.setPassword(newPassw);
+    }
+
+    //Aktualizowanie danych użytkownika
     @Override
     public User updateUser(User user, Long userId){
+
         User usDB = userRepository.findById(userId).get();
-        if (Objects.nonNull(user.getUsername())
-                && !"".equalsIgnoreCase(
-                user.getUsername())) {
-            usDB.setUsername(
-                    user.getUsername());
-        }
-
-        if (Objects.nonNull(
-                user.getUsername())
-                && !"".equalsIgnoreCase(
-                user.getEmail())) {
-            usDB.setEmail(
-                    user.getEmail());
-        }
-
-        if (Objects.nonNull(user.getPassword())
-                && !"".equalsIgnoreCase(
-                user.getPassword())) {
-            usDB.setPassword(
-                    user.getPassword());
-        }
-
+        changeUnIfNotEmpty(usDB, user);
+        changeMailIfNotEmpty(usDB, user);
+        changePasswIfNotEmpty(usDB, user);
         return userRepository.save(usDB);
 
     }
 
     @Override
-    public void deleteUserById(Long Id){userRepository.deleteById(Id);}
+    public String deleteUserById(Long Id){
+        if(userRepository.existsById(Id)) {
+            userRepository.deleteById(Id);
+            return "Deleted successfully";
+        }
+        return "User not found";
+    }
 
     @Override
-    public void assignRoleToUser(Long userId, Long roleId){
+    public ResponseEntity<?> assignRoleToUser(Long userId, Long roleId){
         User user = userRepository.findById(userId).orElse(null);
         Role role = roleRepository.findById(roleId).orElse(null);
         assert user != null;
@@ -76,5 +94,6 @@ public class UserServiceImpl implements UserService{
         role.getUsersList().add(user);
         userRepository.save(user);
         roleRepository.save(role);
+        return ResponseEntity.ok().build();
     }
 }

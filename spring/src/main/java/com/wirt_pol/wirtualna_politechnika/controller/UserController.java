@@ -26,11 +26,7 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     public ResponseEntity<User> fetchUserById(@PathVariable Long id) {
-        User user = userService.fetchUserById(id);
-        if (user != null)
-            return ResponseEntity.ok(user);
-        else
-            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(userService.fetchUserById(id));
     }
 
     @PutMapping("/users/{id}")
@@ -40,14 +36,12 @@ public class UserController {
 
     @DeleteMapping("/users/{id}")
     public String deleteUserById(@PathVariable("id") Long userId){
-        userService.deleteUserById(userId);
-        return "Deleted Successfully";
+        return userService.deleteUserById(userId);
     }
 
     @PutMapping("/users/{userId}/roles/{roleId}")
     public ResponseEntity<?> assignRoleToUser(@PathVariable Long userId, @PathVariable Long roleId){
-        userService.assignRoleToUser(userId, roleId);
-        return ResponseEntity.ok().build();
+        return userService.assignRoleToUser(userId, roleId);
     }
 
 }

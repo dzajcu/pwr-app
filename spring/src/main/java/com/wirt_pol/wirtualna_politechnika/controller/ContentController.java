@@ -4,9 +4,7 @@ import com.wirt_pol.wirtualna_politechnika.entity.Content;
 import com.wirt_pol.wirtualna_politechnika.service.ContentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @CrossOrigin
@@ -17,15 +15,13 @@ public class ContentController {
     ContentService contentService;
 
     @GetMapping("/content")
-    public List<Content> fetchContentList(){return contentService.fetchContentList();}
+    public List<Content> fetchContentList(){
+        return contentService.fetchContentList();
+    }
 
     @GetMapping("/content/{id}")
-    public ResponseEntity<Content> fetchContentById(@PathVariable Long id){
-        Content content = contentService.fetchContentById(id);
-        if(content!=null)
-            return ResponseEntity.ok(content);
-        else
-            return ResponseEntity.notFound().build();
+    public Content fetchContentById(@PathVariable Long id){
+        return contentService.fetchContentById(id);
     }
     @PostMapping("/content")
     public Content createContent(@Valid @RequestBody Content content){

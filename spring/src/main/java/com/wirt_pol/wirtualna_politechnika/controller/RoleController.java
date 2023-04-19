@@ -20,12 +20,8 @@ public class RoleController {
     @GetMapping ("/roles")
     public List<Role> fetchRoleList(){return roleService.fetchRoleList();}
     @GetMapping("roles/{id}")
-    public ResponseEntity<Role> fetchRoleById(@PathVariable Long id){
-        Role role = roleService.fetchRoleById(id);
-        if(role != null)
-            return ResponseEntity.ok(role);
-        else
-            return ResponseEntity.notFound().build();
+    public Role fetchRoleById(@PathVariable Long id){
+        return roleService.fetchRoleById(id);
     }
     @PutMapping("/roles/{id}")
     public Role updateRole(@RequestBody Role role, @PathVariable("id") Long roleId){

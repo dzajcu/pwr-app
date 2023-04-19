@@ -3,7 +3,10 @@ package com.wirt_pol.wirtualna_politechnika.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,11 +31,12 @@ public class Content {
     private String description;
 
 
-    @Column(name = "tags")
+    @ElementCollection
     private List<String> tags = new ArrayList<>();
 
     @Column (name = "when_created")
-    private Date creationTime;
+    @CreationTimestamp
+    private LocalDateTime creationTime;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", referencedColumnName = "id")
