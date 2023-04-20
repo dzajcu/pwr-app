@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./styles/css/Login.module.css";
+import styles from "./styles/css/PostForm.module.css";
 
 export const PostForm = (props) => {
     const [post, setPost] = useState({});
@@ -8,20 +8,29 @@ export const PostForm = (props) => {
     const textHandler = (e) => {
         setCharacters(1000 - e.target.value.length);
         setPost(e.target.value);
+
+        const textarea = e.target;
+        textarea.style.height = "auto";
+        textarea.style.height = `${textarea.scrollHeight}px`;
+
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const symbols = /[&/\\,+()$~%.'"*?<>{}]/g;
+        const tags = post.replace(symbols, ' ').split(' ').filter(word => word[0]==='#' && word.length > 2);
+        console.log(tags);
+
         fetch("http://localhost:8080/content", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                title: 'Title',
+                title: "Title",
                 description: post,
-                tags: ['tag', 'inny tag'],
-                creationTime: ''
+                tags: tags,
+                creationTime: "",
             }),
         })
             .then((response) => {
@@ -41,26 +50,30 @@ export const PostForm = (props) => {
             });
     };
 
-
     return (
-        <form onSubmit={handleSubmit} className={styles.form}>
-            <p className={`${styles.text_smaller} ${styles.input_title}`}>
-                {characters}
-            </p>
+        <div className="container">
+            <form onSubmit={handleSubmit} className={styles.form}>
+                <div className={`${styles.grow_wrap}`}>
+                    <textarea
+                        name="text"
+                        id="text"
+                        // onInput="this.parentNode.dataset.replicatedValue = this.value"
+                        onInput={textHandler}
+                        className={`${styles.inputbox}`}
+                        type="text"
+                        placeholder="Napisz coś..."
+                        maxLength="1000"
+                    />
+                </div>
 
-            <input
-                onChange={textHandler}
-                className={`${styles.text_smaller} ${styles.box} ${styles.inputbox}`}
-                type="text"
-                // value={post}
-                placeholder="Cos tam..."
-            />
-            <button
-                className={`${styles.text_bigger} ${styles.submit} ${styles.register} ${styles.box} ${styles.btn}`}
-                type="submit"
-            >
-                Opublikuj
-            </button>
-        </form>
+                <p className={`${styles.counter}`}>Pozostałe znaki: {characters}/1000</p>
+                <button
+                    className={`${styles.btn}`}
+                    type="submit"
+                >
+                    Opublikuj
+                </button>
+            </form>
+        </div>
     );
 };

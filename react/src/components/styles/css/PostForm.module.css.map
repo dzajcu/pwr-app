@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"PostForm.module.css"}
+{"version":3,"sources":["../PostForm.module.scss","PostForm.module.css"],"names":[],"mappings":"AAAA;EACI,cAAA;EACA,aAAA;EACA,sBAAA;ACCJ;;ADEA;EAEI,kBAAA;EACA,iBAAA;EACA,oBAAA;EACA,oBAAA;ACAJ;;ADGA;EACI,eAAA;EACA,iBAAA;EAEA,gBAAA;EACA,YAAA;EACA,WAAA;EACA,oBAAA;EACA,qCAAA;EACA,mBAAA;EACA,2CAAA;EACA,4BAAA;EACA,oCAAA;EACA,2CAAA;ACDJ;;ADIA;EACI,oBAAA;EACA,kBAAA;EACA,oBAAA;EACA,YAAA;EACA,aAAA;EACA,iBAAA;EACA,oBAAA;EACA,sBAAA;EAEA,2CAAA;ACFJ","file":"PostForm.module.css"}

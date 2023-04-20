@@ -46,10 +46,10 @@ function App() {
         <div className="App">
             {/* currentForm === "login" ? <Login onFormSwitch={toogleForm}/> : <Register onFormSwitch={toogleForm}/> */}
             {/* <Header/> */}
-            <MainPage>
-                <PostForm onAddPost={addPostHandler} />
-                <Posts postsList={posts} />
-            </MainPage>
+             <MainPage>
+                <PostForm onAddPost={addPostHandler}/>
+                <Posts postsList={posts} />/
+            </MainPage> 
         </div>
     );
 }
