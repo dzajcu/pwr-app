@@ -4,6 +4,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public interface UserService {
     User saveUser(User user);
@@ -12,5 +14,6 @@ public interface UserService {
     User updateUser(User user, Long userId);
     String deleteUserById(Long UserId);
     ResponseEntity<?> assignRoleToUser(Long userId, Long roleId);
-
+    User fetchUserByUsername(String username);
+    User login(String username, String password);
 }

@@ -1,21 +1,15 @@
 package com.wirt_pol.wirtualna_politechnika;
 
-import com.wirt_pol.wirtualna_politechnika.DTO.UserDTO;
 import com.wirt_pol.wirtualna_politechnika.entity.Role;
 import com.wirt_pol.wirtualna_politechnika.entity.User;
 import com.wirt_pol.wirtualna_politechnika.service.RoleService;
 import com.wirt_pol.wirtualna_politechnika.service.UserService;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -23,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
+@Profile("test")
 public class WirtualnaPolitechnikaApplicationTest {
 
     @Autowired
@@ -102,7 +97,7 @@ public class WirtualnaPolitechnikaApplicationTest {
        assertEquals(updatedUser.getEmail(), savedUpdatedUser.getEmail());
        assertEquals(updatedUser.getPassword(), savedUpdatedUser.getPassword());
     }
-/*
+
     @Test
     public void testAssignRoleToUser(){
         User user = new User();
@@ -125,5 +120,5 @@ public class WirtualnaPolitechnikaApplicationTest {
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
- */
+
     }

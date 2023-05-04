@@ -1,6 +1,7 @@
 package com.wirt_pol.wirtualna_politechnika.DTO;
 
-
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import com.wirt_pol.wirtualna_politechnika.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +14,13 @@ import org.springframework.context.annotation.Bean;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
+
+    @NotNull(message = "Username box cannot be left empty")
+    @Size(min = 3, max = 25, message = "Username must have 3 to 25 letters")
     private String userName;
+
+    @NotNull(message = "Password box cannot be left empty")
+    @Size(min = 6, max = 25, message = "Password must have 6 to 25 letters")
     private String password;
 
     public static UserDTO fromEntity(User user) {
