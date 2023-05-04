@@ -1,1 +1,39 @@
-/*# sourceMappingURL=PostForm.module.css.map */
+.form {
+  margin: 7rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.counter {
+  font-style: italic;
+  font-size: 1.2rem;
+  align-self: flex-end;
+  margin-right: 1.5rem;
+}
+
+.inputbox {
+  padding: 1.5rem;
+  font-size: 1.4rem;
+  overflow: hidden;
+  resize: none;
+  width: 100%;
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 6px 7px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(7.4px);
+  -webkit-backdrop-filter: blur(7.4px);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+}
+
+.btn {
+  margin-right: 1.5rem;
+  margin-top: 0.5rem;
+  align-self: flex-end;
+  width: 15rem;
+  padding: 1rem;
+  font-size: 1.4rem;
+  border-radius: 10rem;
+  background-color: #fff;
+  box-shadow: 6px 7px 20px rgba(0, 0, 0, 0.2);
+}/*# sourceMappingURL=PostForm.module.css.map */

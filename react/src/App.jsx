@@ -44,12 +44,12 @@ function App() {
 
     return (
         <div className="App">
-            {/* currentForm === "login" ? <Login onFormSwitch={toogleForm}/> : <Register onFormSwitch={toogleForm}/> */}
+            {/* {currentForm === "login" ? <Login onFormSwitch={toogleForm}/> : <Register onFormSwitch={toogleForm}/>} */}
             {/* <Header/> */}
-            <MainPage>
-                <PostForm onAddPost={addPostHandler} />
+             <MainPage>
+                <PostForm onAddPost={addPostHandler}/>
                 <Posts postsList={posts} />
-            </MainPage>
+            </MainPage> 
         </div>
     );
 }
