@@ -1,4 +1,4 @@
-import styles from "./styles/css/Post.module.css";
+import styles from "../styles/css/Post.module.css";
 import React from "react";
 import { Tag } from "./Tag";
 

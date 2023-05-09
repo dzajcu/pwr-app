@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./styles/css/Header.module.css";
+import styles from "../styles/css/Header.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import logo from "../../public/logo.png";
+import logo from "../../../public/logo.png";
 import { HeaderBtn } from "./HeaderBtn";
 
 export const Header = () => {
