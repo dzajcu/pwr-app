@@ -1,4 +1,5 @@
 package com.wirt_pol.wirtualna_politechnika.controller;
+import com.wirt_pol.wirtualna_politechnika.DTO.UserDTO;
 import com.wirt_pol.wirtualna_politechnika.entity.User;
 import com.wirt_pol.wirtualna_politechnika.service.UserService;
 import jakarta.validation.Valid;
@@ -6,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import java.util.List;
+
 
 @CrossOrigin
 
@@ -44,4 +46,8 @@ public class UserController {
         return userService.assignRoleToUser(userId, roleId);
     }
 
+    @GetMapping("/login/")
+    public ResponseEntity<?> login(@RequestBody UserDTO loginRequest){
+        return ResponseEntity.ok(userService.login(loginRequest.getUserName(), loginRequest.getPassword()));
+    }
 }

@@ -23,7 +23,7 @@ public class Role {
     @Column(name = "rolename", nullable = false)
     private String role;
 
-    @OneToMany(mappedBy = "role")
+    @OneToMany(mappedBy = "role", fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<User> usersList;
 
