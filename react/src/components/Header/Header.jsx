@@ -18,12 +18,18 @@ export const Header = () => {
                 </div>
 
                 <div className={styles.buttons}>
-                    <HeaderBtn text="Zaloguj się" style={styles["login"]} />
                     <HeaderBtn
+                        path="/login"
+                        text="Zaloguj się"
+                        style={styles["login"]}
+                    />
+                    <HeaderBtn
+                        path="/register"
                         text="Zarejestruj się"
                         style={styles["register"]}
                     />
                     <HeaderBtn
+                        path="/mainpage"
                         text="Kontynuuj jako gość"
                         style={styles["guest"]}
                     />

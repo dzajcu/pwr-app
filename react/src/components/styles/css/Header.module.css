@@ -68,8 +68,6 @@
 }
 
 .btn {
-  display: flex;
-  flex-direction: column;
   margin-top: 2rem;
   padding: 4rem;
   border-radius: 1rem;
