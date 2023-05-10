@@ -1,16 +1,48 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from '../styles/css/Login.module.css'
 import logo from '../../../public/logo.png'
 import { FaGoogle } from 'react-icons/fa'
-import { Link } from "react-router-dom"
-
+import { Link } from 'react-router-dom'
 
 export const Login = props => {
-	const [username, setUsername] = useState('')
+	const [login, setLogin] = useState('')
 	const [password, setPassword] = useState('')
-	//Functionality after submitting
+	const [formIsValid, setFormIsValid] = useState(false)
+
+	const [loginTouched, setLoginTouched] = useState(false)
+	const [passwordTouched, setPasswordTouched] = useState(false)
+
+	const loginIsValid = login.trim() !== ''
+	const loginInputIsInvalid = !loginIsValid && loginTouched
+
+	const passwordIsValid = password.trim() !== ''
+	const passwordInputIsInvalid = !passwordIsValid && passwordTouched
+
+	useEffect(() => {
+		if (loginIsValid && passwordIsValid) {
+			setFormIsValid(true)
+		} else {
+			setFormIsValid(false)
+		}
+	}, [loginIsValid, passwordIsValid])
+
+	const loginInputChangeHandler = e => {
+		setLogin(e.target.value)
+	}
+
+	const passwordInputChangeHandler = e => {
+		setPassword(e.target.value)
+	}
+
 	const handleSubmit = e => {
 		e.preventDefault()
+
+		setLoginTouched(true)
+		setPasswordTouched(true)
+
+		if (!formIsValid) {
+			return
+		}
 
 		fetch('http://localhost:8080/users', {
 			method: 'GET',
@@ -26,7 +58,7 @@ export const Login = props => {
 			})
 			.then(data => {
 				data.forEach(function (_, i) {
-					if (data[i].username.includes(username) && data[i].password.includes(password)) console.log('Zalogowano')
+					if (data[i].login.includes(login) && data[i].password.includes(password)) console.log('Zalogowano')
 					else console.error('Niepoprawne dane!')
 				})
 			})
@@ -34,8 +66,11 @@ export const Login = props => {
 				console.error('There was a problem with the fetch operation:', error)
 			})
 
-		setUsername('')
+		setLogin('')
 		setPassword('')
+
+		setLoginTouched(false)
+		setPasswordTouched(false)
 	}
 
 	return (
@@ -58,20 +93,26 @@ export const Login = props => {
 					<p className={`${styles.text_smaller} ${styles.input_title}`}>Adres e-mail lub nazwa użytkownika</p>
 
 					<input
-						className={`${styles.text_smaller} ${styles.box} ${styles.inputbox}`}
-						value={username}
-						onChange={e => setUsername(e.target.value)}
+						className={`${styles.text_smaller} ${styles.box} ${styles.inputbox} ${
+							loginInputIsInvalid ? styles.validate_error_border : ''
+						}`}
+						value={login}
+						onChange={loginInputChangeHandler}
 						placeholder='Adres e-mail lub nazwa użytkownika'
 					/>
+					{loginInputIsInvalid && <p className={`${styles.validate_error}`}>Pole nie może być puste!</p>}
 					<p className={`${styles.text_smaller} ${styles.input_title}`}>Hasło</p>
 
 					<input
-						className={`${styles.text_smaller} ${styles.box} ${styles.inputbox}`}
+						className={`${styles.text_smaller} ${styles.box} ${styles.inputbox} ${
+							passwordInputIsInvalid ? styles.validate_error_border : ''
+						}`}
 						value={password}
-						onChange={e => setPassword(e.target.value)}
+						onChange={passwordInputChangeHandler}
 						type='password'
 						placeholder='Hasło'
 					/>
+					{passwordInputIsInvalid && <p className={`${styles.validate_error}`}>Pole nie może być puste!</p>}
 					<button className={`${styles.text_smaller} ${styles.remind}`}>Nie pamiętasz hasła?</button>
 
 					<div className={styles.footer}>
@@ -89,12 +130,12 @@ export const Login = props => {
 				</form>
 				<span className={styles.line}></span>
 				<p className={styles.text_bigger}>Nie posiadasz konta?</p>
-				<Link
-					to='/register'
-					className={`${styles.text_bigger} ${styles.box}  ${styles.btn}`}>
+				<Link to='/register' className={`${styles.text_bigger} ${styles.box}  ${styles.btn}`}>
 					Zarejestruj się
 				</Link>
-				<Link to='/mainpage' className={`${styles.text_smaller} ${styles.guest}`}>Kontynuuj jako gość</Link>
+				<Link to='/mainpage' className={`${styles.text_smaller} ${styles.guest}`}>
+					Kontynuuj jako gość
+				</Link>
 			</div>
 		</div>
 	)

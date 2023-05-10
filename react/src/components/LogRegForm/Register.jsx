@@ -37,17 +37,14 @@ export const Register = props => {
 	}, [emailIsValid, usernameIsValid, passwordIsValid, passwordValidatedIsValid])
 
 	const emailInputBlurHandler = e => {
-		setEmail(e.target.value)
 		setEmailTouched(true)
 	}
 
 	const usernameInputBlurHandler = e => {
-		setUsername(e.target.value)
 		setUsernameTouched(true)
 	}
 
 	const passwordInputBlurHandler = e => {
-		setPassword(e.target.value)
 		setPasswordTouched(true)
 	}
 
@@ -73,6 +70,11 @@ export const Register = props => {
 
 	const handleSubmit = e => {
 		e.preventDefault()
+
+		setEmailTouched(true)
+		setUsernameTouched(true)
+		setPasswordTouched(true)
+		setPasswordValidatedTouched(true)
 
 		if (!formIsValid) {
 			return
@@ -106,7 +108,7 @@ export const Register = props => {
 		setUsername('')
 		setPassword('')
 		setPasswordValidated('')
-        
+
 		setEmailTouched(false)
 		setUsernameTouched(false)
 		setPasswordTouched(false)
@@ -134,20 +136,23 @@ export const Register = props => {
 					<p className={`${styles.text_smaller} ${styles.input_title}`}>Adres e-mail</p>
 
 					<input
-						className={`${styles.text_smaller} ${styles.box} ${styles.inputbox}`}
+						className={`${styles.text_smaller} ${styles.box} ${styles.inputbox} ${
+							emailInputIsInvalid ? styles.validate_error_border : ''
+						}`}
 						value={email}
 						onChange={emailInputChangeHandler}
 						onBlur={emailInputBlurHandler}
-						type='email'
 						name='email'
 						autocomplete='email'
 						placeholder='Adres e-mail'
 					/>
-					{emailInputIsInvalid && <p>Pole nie może być puste!</p>}
+					{emailInputIsInvalid && <p className={`${styles.validate_error}`}>Pole nie może być puste!</p>}
 					<p className={`${styles.text_smaller} ${styles.input_title}`}>Nazwa użytkownika</p>
 
 					<input
-						className={`${styles.text_smaller} ${styles.box} ${styles.inputbox}`}
+						className={`${styles.text_smaller} ${styles.box} ${styles.inputbox} ${
+							usernameInputIsInvalid ? styles.validate_error_border : ''
+						}`}
 						value={username}
 						onChange={usernameInputChangeHandler}
 						onBlur={usernameInputBlurHandler}
@@ -155,38 +160,42 @@ export const Register = props => {
 						name='username'
 						placeholder='Nazwa użytkownika'
 					/>
-					{usernameInputIsInvalid && <p>Pole nie może być puste!</p>}
+					{usernameInputIsInvalid && <p className={`${styles.validate_error}`}>Pole nie może być puste!</p>}
 					<p className={`${styles.text_smaller} ${styles.input_title}`}>Hasło</p>
 					<input
-						className={`${styles.text_smaller} ${styles.box} ${styles.inputbox}`}
+						className={`${styles.text_smaller} ${styles.box} ${styles.inputbox} ${
+							passwordInputIsInvalid ? styles.validate_error_border : ''
+						}`}
 						value={password}
 						onChange={passwordInputChangeHandler}
 						onBlur={passwordInputBlurHandler}
 						type='password'
 						placeholder='Hasło'
 					/>
-					{passwordInputIsInvalid && <p>Pole nie może być puste!</p>}
+					{passwordInputIsInvalid && <p className={`${styles.validate_error}`}>Pole nie może być puste!</p>}
 					<p className={`${styles.text_smaller} ${styles.input_title}`}>Powtórz hasło</p>
 
 					<input
-						className={`${styles.text_smaller} ${styles.box} ${styles.inputbox}`}
+						className={`${styles.text_smaller} ${styles.box} ${styles.inputbox} ${
+							passwordValidatedInputIsInvalid ? styles.validate_error_border : ''
+						}`}
 						value={passwordValidated}
 						onChange={passwordValidatedInputChangeHandler}
 						onBlur={passwordValidatedInputBlurHandler}
 						type='password'
 						placeholder='Powtórz hasło'
 					/>
-					{passwordValidatedInputIsInvalid && <p>Pole nie może być puste!</p>}
-
+					{(passwordValidatedInputIsInvalid && (
+						<p className={`${styles.validate_error}`}>Pole nie może być puste!</p>
+					)) ||
+						(password !== passwordValidated && passwordTouched && passwordValidatedTouched && passwordIsValid && (
+							<p className={`${styles.validate_error}`}>Hasła nie są takie same!</p>
+						))}
 					<button
 						className={`${styles.text_bigger} ${styles.submit} ${styles.register} ${styles.box} ${styles.btn}`}
-						type='submit'
-						disabled={!formIsValid}>
+						type='submit'>
 						Utwórz konto
 					</button>
-					{!formIsValid && usernameTouched && emailTouched && passwordTouched && passwordValidatedTouched && (
-						<p>Uzupełnij poprawnie wszystkie pola!</p>
-					)}
 				</form>
 				<span className={styles.line}></span>
 				<p className={styles.text_bigger}>Masz już konto?</p>
