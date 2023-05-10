@@ -1,6 +1,7 @@
 package com.wirt_pol.wirtualna_politechnika.service;
 
 import com.wirt_pol.wirtualna_politechnika.entity.Content;
+import com.wirt_pol.wirtualna_politechnika.exception.optionalContentNotFoundException;
 import com.wirt_pol.wirtualna_politechnika.repository.ContentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public Content fetchContentById(Long contentId){
         Optional<Content> optionalContent = contentRepository.findById(contentId);
-        return  optionalContent.orElse(null);
+        return  optionalContent.orElseThrow(() -> new optionalContentNotFoundException(contentId));
     }
 
     @Override

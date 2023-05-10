@@ -1,6 +1,7 @@
 package com.wirt_pol.wirtualna_politechnika.service;
 
 import com.wirt_pol.wirtualna_politechnika.entity.Role;
+import com.wirt_pol.wirtualna_politechnika.exception.roleNotFoundException;
 import com.wirt_pol.wirtualna_politechnika.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role fetchRoleById(Long roleId){
         Optional<Role> optionalRole = roleRepository.findById(roleId);
-        return optionalRole.orElse(null);
+        return optionalRole.orElseThrow(() -> new roleNotFoundException(roleId));
     }
     @Override
     public Role updateRole(Role role, Long roleId) {

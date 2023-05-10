@@ -2,13 +2,14 @@ package com.wirt_pol.wirtualna_politechnika.service;
 import java.util.Optional;
 import com.wirt_pol.wirtualna_politechnika.entity.Role;
 import com.wirt_pol.wirtualna_politechnika.entity.User;
+import com.wirt_pol.wirtualna_politechnika.exception.roleNotFoundException;
+import com.wirt_pol.wirtualna_politechnika.exception.userNotFoundException;
 import com.wirt_pol.wirtualna_politechnika.repository.RoleRepository;
 import com.wirt_pol.wirtualna_politechnika.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -33,7 +34,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public User fetchUserById(Long userId) {
         Optional<User> optionalUser = userRepository.findById(userId);
-        return optionalUser.orElse(null);
+        return optionalUser.orElseThrow(() -> new userNotFoundException(userId));
     }
 
     //Sprawdzenie czy 2 podane stringi są różne od siebie i czy 2 string nie jest pusty
@@ -87,8 +88,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public ResponseEntity<?> assignRoleToUser(Long userId, Long roleId){
-        User user = userRepository.findById(userId).orElse(null);
-        Role role = roleRepository.findById(roleId).orElse(null);
+        User user = userRepository.findById(userId).orElseThrow(() -> new userNotFoundException(userId));
+        Role role = roleRepository.findById(roleId).orElseThrow(() -> new roleNotFoundException(roleId));
         assert user != null;
         user.setRole(role);
         role.getUsersList().add(user);
