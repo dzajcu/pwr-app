@@ -14,6 +14,6 @@ public interface UserService {
     User updateUser(User user, Long userId);
     String deleteUserById(Long UserId);
     ResponseEntity<?> assignRoleToUser(Long userId, Long roleId);
-    User fetchUserByUsername(String username);
-    User login(String username, String password);
+    Optional<User> fetchUserByUsername(String username);
+    //User login(String username, String password);
 }

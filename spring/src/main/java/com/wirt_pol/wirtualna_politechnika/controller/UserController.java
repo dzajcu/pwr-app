@@ -46,8 +46,8 @@ public class UserController {
         return userService.assignRoleToUser(userId, roleId);
     }
 
-    @GetMapping("/login/")
-    public ResponseEntity<?> login(@RequestBody UserDTO loginRequest){
-        return ResponseEntity.ok(userService.login(loginRequest.getUserName(), loginRequest.getPassword()));
-    }
+//    @GetMapping("/login/")
+//    public ResponseEntity<?> login(@RequestBody UserDTO loginRequest){
+//        return ResponseEntity.ok(userService.login(loginRequest.getUserName(), loginRequest.getPassword()));
+//    }
 }
