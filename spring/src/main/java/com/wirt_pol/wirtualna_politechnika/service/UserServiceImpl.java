@@ -98,17 +98,17 @@ public class UserServiceImpl implements UserService{
         return ResponseEntity.ok().build();
     }
     @Override
-    public User fetchUserByUsername(String username) {
+    public Optional<User> fetchUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
-    @Override
-    public User login(String username, String password){
-        User user = userRepository.findByUsername(username);
-        if(user == null || !user.getPassword().equals(password)){
-            return null;
-        }
-        else {
-            return user;
-        }
-    }
+//    @Override
+//    public User login(String username, String password){
+//        User user = userRepository.findByUsername(username);
+//        if(user == null || !user.getPassword().equals(password)){
+//            return null;
+//        }
+//        else {
+//            return user;
+//        }
+//    }
 }
