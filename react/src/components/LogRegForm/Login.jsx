@@ -7,6 +7,7 @@ import { clearInputsLogin } from '../../functions/clearInputs'
 import { loginInputChangeHandler, passwordInputChangeHandler } from '../../functions/changeHandlers'
 import { setTouchedFalseLogin, setTouchedTrueLogin } from '../../functions/setTouched'
 import { fetchGetUser } from '../../functions/fetchGetUser'
+import { InputRounded } from './InputRounded'
 
 export const Login = props => {
 	const [login, setLogin] = useState('')
@@ -60,10 +61,8 @@ export const Login = props => {
 				<form className={styles.form} onSubmit={handleSubmit}>
 
 					<p className={`${styles.text_smaller} ${styles.input_title}`}>Adres e-mail lub nazwa użytkownika</p>
-					<input
-						className={`${styles.text_smaller} ${styles.box} ${styles.inputbox} ${
-							loginInputIsInvalid ? styles.validate_error_border : ''
-						}`}
+					<InputRounded
+						classes={`${loginInputIsInvalid ? styles.validate_error_border : ''}`}
 						value={login}
 						onChange={e => loginInputChangeHandler(e, setLogin)}
 						placeholder='Adres e-mail lub nazwa użytkownika'
@@ -71,8 +70,8 @@ export const Login = props => {
 					{loginInputIsInvalid && <p className={`${styles.validate_error}`}>Pole nie może być puste!</p>}
 
 					<p className={`${styles.text_smaller} ${styles.input_title}`}>Hasło</p>
-					<input
-						className={`${styles.text_smaller} ${styles.box} ${styles.inputbox} ${
+					<InputRounded
+						className={`${styles.inputbox} ${
 							passwordInputIsInvalid ? styles.validate_error_border : ''
 						}`}
 						value={password}
@@ -81,8 +80,8 @@ export const Login = props => {
 						placeholder='Hasło'
 					/>
 					{passwordInputIsInvalid && <p className={`${styles.validate_error}`}>Pole nie może być puste!</p>}
-					<button className={`${styles.text_smaller} ${styles.remind}`}>Nie pamiętasz hasła?</button>
 
+					<button className={`${styles.text_smaller} ${styles.remind}`}>Nie pamiętasz hasła?</button>
 					<div className={styles.footer}>
 						<div className={styles.checkbox}>
 							<input type='checkbox' id='task-1' />
