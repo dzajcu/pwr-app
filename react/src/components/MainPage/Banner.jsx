@@ -3,10 +3,10 @@ import React from "react";
 
 export const SearchBar = (props) => {
     return (
-        <div className={`${styles.searchBar}`}>
+        <div className={`${styles.search_bar_background}`}>
             <input
                 type="text"
-                className={`${styles.searchar}`}
+                className={`${styles.search_bar}`}
                 placeholder="Szukaj..."
             />
         </div>

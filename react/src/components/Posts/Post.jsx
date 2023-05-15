@@ -8,8 +8,6 @@ export const Post = props => {
 	moment.locale('pl')
 	const someDate = new Date(props.date)
 	const formattedDateTime = moment(someDate).locale('pl').fromNow()
-	console.log(formattedDateTime)
-	console.log(someDate)
 
 	return (
 		<div className={styles.post}>

@@ -3,34 +3,16 @@ import styles from "../styles/css/MainPage.module.css";
 import { PostForm } from "../Posts/PostForm";
 import { Posts } from "../Posts/Posts";
 import { SearchBar } from "./Banner";
+import { fetchGetContent } from "../../functions/fetchGetContent";
 import { Link } from "react-router-dom";
+import { handleScrollToTop } from '../../functions/changeHandlers'
+import { LinkRounded } from "../reusable/LinkRounded";
 
 export const MainPage = (props) => {
-    useEffect(() => {
-        fetch("http://localhost:8080/content", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                return response.json();
-            })
-            .then((data) => {
-                setPosts(data);
-            })
-            .catch((error) => {
-                console.error(
-                    "There was a problem with the fetch operation:",
-                    error
-                );
-            });
-    }, []);
-
     const [posts, setPosts] = useState([]);
+    useEffect(() => {
+        fetchGetContent(setPosts);
+    }, []);
 
     const addPostHandler = (post) => {
         setPosts((prevPosts) => [post, ...prevPosts]);
@@ -40,24 +22,30 @@ export const MainPage = (props) => {
         <div className={styles.container}>
             <section className={`${styles.left} ${styles.side}`}>
                 <div className={`${styles.logo}`}>
-                    <Link to="/mainpage">
+                    <Link to="#" onClick={handleScrollToTop}>
                         <img
                             src="../../../public/logoblack.png"
                             alt="logo"
                             className={`${styles.logolink}`}
                         />
                     </Link>
-                    <Link to="/mainpage" className={`${styles.link}`}>
+                    <Link to="#" onClick={handleScrollToTop} className={`${styles.link}`}>
                         Wirtualna Politechnika
                     </Link>
                 </div>
             </section>
             <section className={styles.posts}>
-                    <SearchBar />
+                <SearchBar/>
                 <PostForm onAddPost={addPostHandler} />
                 <Posts postsList={posts} />
             </section>
-            <section className={`${styles.right} ${styles.side}`}></section>
+            <section className={`${styles.right} ${styles.side}`}>
+                <div className={`${styles.buttons}`}>
+                    <LinkRounded style={{backgroundColor:'black', color:'white'}} to='/login' text='Zaloguj się'/>
+                    <LinkRounded to='/register' text='Zarejestruj się'/>
+
+                </div>
+            </section>
         </div>
     );
 };

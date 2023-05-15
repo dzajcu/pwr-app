@@ -18,7 +18,8 @@ import {
 } from '../../functions/changeHandlers'
 import { setTouchedTrueRegister, setTouchedFalseRegister } from '../../functions/setTouched'
 import { clearInputsRegister } from '../../functions/clearInputs'
-import { InputRounded } from './InputRounded'
+import { InputRounded } from '../reusable/InputRounded'
+import { LinkRounded } from '../reusable/LinkRounded'
 
 export const Register = props => {
 	const [email, setEmail] = useState('')
@@ -139,9 +140,9 @@ export const Register = props => {
 				</form>
 				<span className={styles.line}></span>
 				<p className={styles.text_bigger}>Masz już konto?</p>
-				<Link to='/login' className={`${styles.text_bigger} ${styles.box} ${styles.btn}`}>
-					Zaloguj się
-				</Link>
+				<LinkRounded to='/login' text='Zaloguj się'/>
+					
+
 				<Link to='/mainpage' className={`${styles.text_smaller} ${styles.guest}`}>
 					Kontynuuj jako gość
 				</Link>
