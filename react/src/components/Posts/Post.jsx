@@ -5,24 +5,9 @@ import moment from 'moment'
 import 'moment/dist/locale/pl'
 
 export const Post = props => {
-	// const date = new Date(props.date);
-	// const time = date.toLocaleTimeString("pl-PL", {
-	//     hour: "2-digit",
-	//     minute: "2-digit",
-	// });
-	// const formattedDate = date.toLocaleDateString("pl-PL");
-	// const formattedDateTime = `${time} ${formattedDate}`;
-	// console.log(formattedDateTime); // Output: 09:47 2023-04-20
-
-	// const someDate = new Date(props.date);
-	// const timeAgo = moment(someDate).diff(moment()); // liczba milisekund
-	// const formattedDate = moment.duration(timeAgo).humanize(); // "1 dzień temu"
-
 	moment.locale('pl')
 	const someDate = new Date(props.date)
 	const formattedDateTime = moment(someDate).locale('pl').fromNow()
-	console.log(formattedDateTime)
-	console.log(someDate)
 
 	return (
 		<div className={styles.post}>

@@ -3,6 +3,21 @@ import styles from '../styles/css/Login.module.css'
 import logo from '../../../public/logo.png'
 import { FaGoogle } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import { fetchPostUser } from '../../functions/fetchPostUser'
+import {
+	emailInputBlurHandler,
+	usernameInputBlurHandler,
+	passwordInputBlurHandler,
+	passwordValidatedInputBlurHandler,
+} from '../../functions/blurHandlers'
+import {
+	emailInputChangeHandler,
+	usernameInputChangeHandler,
+	passwordInputChangeHandler,
+	passwordValidatedInputChangeHandler,
+} from '../../functions/changeHandlers'
+import { setTouchedTrueRegister, setTouchedFalseRegister } from '../../functions/setTouched'
+import { clearInputsRegister } from '../../functions/clearInputs'
 
 export const Register = props => {
 	const [email, setEmail] = useState('')
@@ -36,83 +51,15 @@ export const Register = props => {
 		}
 	}, [emailIsValid, usernameIsValid, passwordIsValid, passwordValidatedIsValid])
 
-	const emailInputBlurHandler = e => {
-		setEmailTouched(true)
-	}
-
-	const usernameInputBlurHandler = e => {
-		setUsernameTouched(true)
-	}
-
-	const passwordInputBlurHandler = e => {
-		setPasswordTouched(true)
-	}
-
-	const passwordValidatedInputBlurHandler = e => {
-		setPasswordValidatedTouched(true)
-	}
-
-	const emailInputChangeHandler = e => {
-		setEmail(e.target.value)
-	}
-
-	const usernameInputChangeHandler = e => {
-		setUsername(e.target.value)
-	}
-
-	const passwordInputChangeHandler = e => {
-		setPassword(e.target.value)
-	}
-
-	const passwordValidatedInputChangeHandler = e => {
-		setPasswordValidated(e.target.value)
-	}
-
 	const handleSubmit = e => {
 		e.preventDefault()
-
-		setEmailTouched(true)
-		setUsernameTouched(true)
-		setPasswordTouched(true)
-		setPasswordValidatedTouched(true)
-
+		setTouchedTrueRegister(setEmailTouched, setUsernameTouched, setPasswordTouched, setPasswordValidatedTouched)
 		if (!formIsValid) {
 			return
 		}
-
-		fetch('http://localhost:8080/users', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				username: username,
-				email: email,
-				password: password,
-			}),
-		})
-			.then(response => {
-				if (!response.ok) {
-					throw new Error('Network response was not ok')
-				}
-				return response.json()
-			})
-			.then(data => {
-				console.log('Data received:', data)
-			})
-			.catch(error => {
-				console.error('There was a problem with the fetch operation:', error)
-			})
-
-		setEmail('')
-		setUsername('')
-		setPassword('')
-		setPasswordValidated('')
-
-		setEmailTouched(false)
-		setUsernameTouched(false)
-		setPasswordTouched(false)
-		setPasswordValidatedTouched(false)
+		fetchPostUser(username, email, password)
+		clearInputsRegister(setEmail, setUsername, setPassword, setPasswordValidated)
+		setTouchedFalseRegister(setEmailTouched, setUsernameTouched, setPasswordTouched, setPasswordValidatedTouched)
 	}
 	return (
 		<div className={styles.bg}>
@@ -140,8 +87,8 @@ export const Register = props => {
 							emailInputIsInvalid ? styles.validate_error_border : ''
 						}`}
 						value={email}
-						onChange={emailInputChangeHandler}
-						onBlur={emailInputBlurHandler}
+						onChange={e => emailInputChangeHandler(e, setEmail)}
+						onBlur={e => emailInputBlurHandler(e, setEmailTouched)}
 						name='email'
 						autocomplete='email'
 						placeholder='Adres e-mail'
@@ -154,8 +101,8 @@ export const Register = props => {
 							usernameInputIsInvalid ? styles.validate_error_border : ''
 						}`}
 						value={username}
-						onChange={usernameInputChangeHandler}
-						onBlur={usernameInputBlurHandler}
+						onChange={e => usernameInputChangeHandler(e, setUsername)}
+						onBlur={e => usernameInputBlurHandler(e, setUsernameTouched)}
 						type='text'
 						name='username'
 						placeholder='Nazwa użytkownika'
@@ -167,8 +114,8 @@ export const Register = props => {
 							passwordInputIsInvalid ? styles.validate_error_border : ''
 						}`}
 						value={password}
-						onChange={passwordInputChangeHandler}
-						onBlur={passwordInputBlurHandler}
+						onChange={e => passwordInputChangeHandler(e, setPassword)}
+						onBlur={e => passwordInputBlurHandler(e, setPasswordTouched)}
 						type='password'
 						placeholder='Hasło'
 					/>
@@ -180,8 +127,8 @@ export const Register = props => {
 							passwordValidatedInputIsInvalid ? styles.validate_error_border : ''
 						}`}
 						value={passwordValidated}
-						onChange={passwordValidatedInputChangeHandler}
-						onBlur={passwordValidatedInputBlurHandler}
+						onChange={e => passwordValidatedInputChangeHandler(e, setPasswordValidated)}
+						onBlur={e => passwordValidatedInputBlurHandler(e, setPasswordValidatedTouched)}
 						type='password'
 						placeholder='Powtórz hasło'
 					/>
