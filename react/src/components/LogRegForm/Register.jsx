@@ -95,7 +95,7 @@ export const Register = props => {
 
 					<p className={`${styles.text_smaller} ${styles.input_title}`}>Nazwa użytkownika</p>
 					<InputRounded
-						className={`${usernameInputIsInvalid ? styles.validate_error_border : ''}`}
+						classes={`${usernameInputIsInvalid ? styles.validate_error_border : ''}`}
 						value={username}
 						onChange={e => usernameInputChangeHandler(e, setUsername)}
 						onBlur={e => usernameInputBlurHandler(e, setUsernameTouched)}
@@ -107,7 +107,7 @@ export const Register = props => {
 
 					<p className={`${styles.text_smaller} ${styles.input_title}`}>Hasło</p>
 					<InputRounded
-						className={`${passwordInputIsInvalid ? styles.validate_error_border : ''}`}
+						classes={`${passwordInputIsInvalid ? styles.validate_error_border : ''}`}
 						value={password}
 						onChange={e => passwordInputChangeHandler(e, setPassword)}
 						onBlur={e => passwordInputBlurHandler(e, setPasswordTouched)}
@@ -118,9 +118,7 @@ export const Register = props => {
 
 					<p className={`${styles.text_smaller} ${styles.input_title}`}>Powtórz hasło</p>
 					<InputRounded
-						className={`${styles.text_smaller} ${styles.box} ${styles.inputbox} ${
-							passwordValidatedInputIsInvalid ? styles.validate_error_border : ''
-						}`}
+						classes={`${passwordValidatedInputIsInvalid ? styles.validate_error_border : ''}`}
 						value={passwordValidated}
 						onChange={e => passwordValidatedInputChangeHandler(e, setPasswordValidated)}
 						onBlur={e => passwordValidatedInputBlurHandler(e, setPasswordValidatedTouched)}

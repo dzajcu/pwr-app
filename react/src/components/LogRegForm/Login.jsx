@@ -59,7 +59,6 @@ export const Login = props => {
 				</div>
 
 				<form className={styles.form} onSubmit={handleSubmit}>
-
 					<p className={`${styles.text_smaller} ${styles.input_title}`}>Adres e-mail lub nazwa użytkownika</p>
 					<InputRounded
 						classes={`${loginInputIsInvalid ? styles.validate_error_border : ''}`}
@@ -71,9 +70,7 @@ export const Login = props => {
 
 					<p className={`${styles.text_smaller} ${styles.input_title}`}>Hasło</p>
 					<InputRounded
-						className={`${styles.inputbox} ${
-							passwordInputIsInvalid ? styles.validate_error_border : ''
-						}`}
+						classes={`${passwordInputIsInvalid ? styles.validate_error_border : ''}`}
 						value={password}
 						onChange={e => passwordInputChangeHandler(e, setPassword)}
 						type='password'
