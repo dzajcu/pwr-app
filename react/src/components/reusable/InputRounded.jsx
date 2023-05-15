@@ -7,7 +7,7 @@ export const InputRounded = props => {
 			onChange={props.onChange}
 			onBlur={props.onBlur}
 			name={props.name}
-			autocomplete={props.autocomplete}
+			autoComplete={props.autocomplete}
 			placeholder={props.placeholder}
 			type={props.type}
 		/>
