@@ -1,4 +1,3 @@
-
 .container {
     // position: relative;
     display: flex;
@@ -10,7 +9,7 @@
 }
 
 section {
-    padding: 2rem 4rem;
+    padding : 2rem 1.5rem;
 }
 
 .side {
@@ -26,13 +25,27 @@ section {
     min-height: 200px;
 }
 
+.logo {
+    // margin-top: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logolink {
+        width: 4rem;
+        color: black;
+    }
+
+    .link {
+        font-size: 2rem;
+        color: black;
+        font-weight: bold;
+    }
+}
+
 .posts {
     width: 60%;
     border-left: 1px solid rgb(197, 197, 197);
     border-right: 1px solid rgb(197, 197, 197);
     min-height: 100vh;
 }
-
-
-
-

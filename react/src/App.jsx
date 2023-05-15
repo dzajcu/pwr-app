@@ -1,7 +1,7 @@
 import { Register } from "./components/LogRegForm/Register";
 import { Login } from "./components/LogRegForm/Login";
 import { Header } from "./components/Header/Header";
-import { MainPage } from "./components/MainPage";
+import { MainPage } from "./components/MainPage/MainPage";
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
