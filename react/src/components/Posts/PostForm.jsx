@@ -1,18 +1,11 @@
 import React, { useState } from 'react'
 import styles from '../styles/css/PostForm.module.css'
+import { fetchPostContent } from '../../functions/fetchPostContent'
+import { textInputHandler } from '../../functions/inputHandlers'
 
 export const PostForm = props => {
 	const [post, setPost] = useState({})
 	const [characters, setCharacters] = useState(1000)
-
-	const textHandler = e => {
-		setCharacters(1000 - e.target.value.length)
-		setPost(e.target.value)
-
-		const textarea = e.target
-		textarea.style.height = 'auto'
-		textarea.style.height = `${textarea.scrollHeight}px`
-	}
 
 	const handleSubmit = e => {
 		e.preventDefault()
@@ -21,32 +14,7 @@ export const PostForm = props => {
 			.replace(symbols, ' ')
 			.split(' ')
 			.filter(word => word[0] === '#' && word.length > 2)
-		console.log(tags)
-
-		fetch('http://localhost:8080/content', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				title: 'Title',
-				description: post,
-				tags: tags,
-				creationTime: '',
-			}),
-		})
-			.then(response => {
-				if (!response.ok) {
-					throw new Error('Network response was not ok')
-				}
-				return response.json()
-			})
-			.then(data => {
-				// console.log("Data received:", data);
-			})
-			.catch(error => {
-				console.error('There was a problem with the fetch operation:', error)
-			})
+		fetchPostContent(post, tags)
 	}
 
 	return (
@@ -56,8 +24,7 @@ export const PostForm = props => {
 					<textarea
 						name='text'
 						id='text'
-						// onInput="this.parentNode.dataset.replicatedValue = this.value"
-						onInput={textHandler}
+						onInput={e => textInputHandler(e, setCharacters, setPost)}
 						className={`${styles.inputbox}`}
 						type='text'
 						placeholder='Napisz coś...'

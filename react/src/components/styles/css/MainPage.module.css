@@ -7,10 +7,6 @@
   color: black;
 }
 
-section {
-  padding: 2rem 4rem;
-}
-
 .side {
   position: sticky; /* dodaj pozycję sticky */
   top: 0; /* ustaw pozycję */
@@ -23,9 +19,33 @@ section {
   min-height: 200px;
 }
 
+.logo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+  margin-right: 1.5rem;
+}
+.logo .logolink {
+  width: 4rem;
+  color: black;
+}
+.logo .link {
+  font-size: 2rem;
+  color: black;
+  font-weight: bold;
+}
+
 .posts {
   width: 60%;
   border-left: 1px solid rgb(197, 197, 197);
   border-right: 1px solid rgb(197, 197, 197);
   min-height: 100vh;
+}
+
+.buttons {
+  display: flex;
+  margin: 1rem;
+  margin-left: 1.5rem;
+  gap: 1rem;
 }/*# sourceMappingURL=MainPage.module.css.map */
