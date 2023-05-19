@@ -4,6 +4,7 @@ import com.wirt_pol.wirtualna_politechnika.entity.Content;
 import com.wirt_pol.wirtualna_politechnika.service.ContentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class ContentController {
         return contentService.fetchContentById(id);
     }
     @PostMapping("/content")
-    public Content createContent(@Valid @RequestBody Content content){
+    public ResponseEntity<Content> createContent(@Valid @RequestBody Content content){
         return contentService.createContent(content);
     }
     @DeleteMapping("/user/{id}")

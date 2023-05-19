@@ -1,4 +1,4 @@
-package com.wirt_pol.wirtualna_politechnika.controller;
+package com.wirt_pol.wirtualna_politechnika.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

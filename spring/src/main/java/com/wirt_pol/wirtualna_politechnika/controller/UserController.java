@@ -42,8 +42,8 @@ public class UserController {
     }
 
     @PutMapping("/users/{userId}/roles/{roleId}")
-    public ResponseEntity<?> assignRoleToUser(@PathVariable Long userId, @PathVariable Long roleId){
-        return userService.assignRoleToUser(userId, roleId);
+    public ResponseEntity<?> assignRoleToUser(@PathVariable String userName, @PathVariable String roleName){
+        return userService.assignRoleToUser(userName, roleName);
     }
 
 //    @GetMapping("/login/")

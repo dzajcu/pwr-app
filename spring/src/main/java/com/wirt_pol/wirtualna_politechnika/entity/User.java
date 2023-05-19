@@ -35,7 +35,7 @@ public class User implements UserDetails {
     @JsonBackReference
     private Role role;
 
-    @OneToMany (mappedBy = "author")
+    @OneToMany (mappedBy = "author", fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Content> userPosts;
 

@@ -1,4 +1,4 @@
-package com.wirt_pol.wirtualna_politechnika.controller;
+package com.wirt_pol.wirtualna_politechnika.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterRequest {
-
+public class AuthenticationRequest {
     private String userName;
-    private String eMail;
-    private String password;
+    String password;
 }

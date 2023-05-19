@@ -1,11 +1,12 @@
 package com.wirt_pol.wirtualna_politechnika.service;
 
-import com.wirt_pol.wirtualna_politechnika.config.JwtAuthenticationFilter;
-import com.wirt_pol.wirtualna_politechnika.controller.AuthenticationRequest;
-import com.wirt_pol.wirtualna_politechnika.controller.AuthenticationResponse;
-import com.wirt_pol.wirtualna_politechnika.controller.RegisterRequest;
+import com.wirt_pol.wirtualna_politechnika.entity.AuthenticationRequest;
+import com.wirt_pol.wirtualna_politechnika.entity.AuthenticationResponse;
+import com.wirt_pol.wirtualna_politechnika.entity.RegisterRequest;
+import com.wirt_pol.wirtualna_politechnika.entity.Role;
 import com.wirt_pol.wirtualna_politechnika.entity.User;
 import com.wirt_pol.wirtualna_politechnika.exception.userNotFoundException;
+import com.wirt_pol.wirtualna_politechnika.repository.RoleRepository;
 import com.wirt_pol.wirtualna_politechnika.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,15 +21,19 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final RoleRepository roleRepository;
 
     public AuthenticationResponse register (RegisterRequest registerRequest){
+        Role role = roleRepository.findByRole("User").orElseThrow(() -> new IllegalArgumentException("Role not found"));
     var user = User.builder()
             .username(registerRequest.getUserName())
             .email(registerRequest.getEMail())
             .password(passwordEncoder.encode(registerRequest.getPassword()))
-            //.role(Role.USER)
+            .role(role)
+            .userPosts(null)
             .build();
     userRepository.save(user);
+    role.getUsersList().add(user);
     var jwtToken = jwtService.generateToken(user);
     return AuthenticationResponse.builder()
             .token(jwtToken)

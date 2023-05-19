@@ -87,9 +87,9 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public ResponseEntity<?> assignRoleToUser(Long userId, Long roleId){
-        User user = userRepository.findById(userId).orElseThrow(() -> new userNotFoundException(userId));
-        Role role = roleRepository.findById(roleId).orElseThrow(() -> new roleNotFoundException(roleId));
+    public ResponseEntity<?> assignRoleToUser(String userName, String roleName){
+        User user = userRepository.findByUsername(userName).orElseThrow(() -> new userNotFoundException(0L));
+        Role role = roleRepository.findByRole(roleName).orElseThrow(() -> new roleNotFoundException(0L));
         assert user != null;
         user.setRole(role);
         role.getUsersList().add(user);

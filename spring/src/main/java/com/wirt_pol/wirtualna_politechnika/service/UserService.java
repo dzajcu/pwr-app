@@ -13,7 +13,7 @@ public interface UserService {
     User fetchUserById(Long userId);
     User updateUser(User user, Long userId);
     String deleteUserById(Long UserId);
-    ResponseEntity<?> assignRoleToUser(Long userId, Long roleId);
+    ResponseEntity<?> assignRoleToUser(String userName, String roleName);
     Optional<User> fetchUserByUsername(String username);
     //User login(String username, String password);
 }
