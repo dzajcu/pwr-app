@@ -1,13 +1,12 @@
 package com.wirt_pol.wirtualna_politechnika.controller;
 
 import com.wirt_pol.wirtualna_politechnika.entity.Role;
-import java.util.List;
 import com.wirt_pol.wirtualna_politechnika.service.RoleService;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController

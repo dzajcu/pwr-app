@@ -5,16 +5,13 @@ import com.wirt_pol.wirtualna_politechnika.entity.User;
 import com.wirt_pol.wirtualna_politechnika.exception.optionalContentNotFoundException;
 import com.wirt_pol.wirtualna_politechnika.repository.ContentRepository;
 import com.wirt_pol.wirtualna_politechnika.repository.UserRepository;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import com.wirt_pol.wirtualna_politechnika.service.JwtService;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;

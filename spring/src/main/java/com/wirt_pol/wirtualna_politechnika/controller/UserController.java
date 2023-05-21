@@ -1,11 +1,12 @@
 package com.wirt_pol.wirtualna_politechnika.controller;
-import com.wirt_pol.wirtualna_politechnika.DTO.UserDTO;
+
 import com.wirt_pol.wirtualna_politechnika.entity.User;
 import com.wirt_pol.wirtualna_politechnika.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 
