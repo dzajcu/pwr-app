@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "../styles/css/Login.module.css";
 import logo from "../../../public/logo.png";
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { clearInputsLogin } from "../../functions/clearInputs";
 import {
     loginInputChangeHandler,
@@ -24,29 +24,38 @@ export const Login = (props) => {
     const [loginTouched, setLoginTouched] = useState(false);
     const [passwordTouched, setPasswordTouched] = useState(false);
 
+    const [authentication, setAuthentication] = useState(true);
+
     const loginIsValid = login.trim() !== "";
     const loginInputIsInvalid = !loginIsValid && loginTouched;
 
     const passwordIsValid = password.trim() !== "";
     const passwordInputIsInvalid = !passwordIsValid && passwordTouched;
 
-    useEffect(() => {
+    const userToken = {};
+	const navigation = useNavigate();
+
+        useEffect(() => {
         if (loginIsValid && passwordIsValid) {
             setFormIsValid(true);
         } else {
             setFormIsValid(false);
         }
     }, [loginIsValid, passwordIsValid]);
-
+    
     const handleSubmit = (e) => {
+
         e.preventDefault();
         setTouchedTrueLogin(setLoginTouched, setPasswordTouched);
-        if (!formIsValid) {
-            return;
-        }
-        fetchGetUser(login, password);
-        clearInputsLogin(setLogin, setPassword);
-        setTouchedFalseLogin(setLoginTouched, setPasswordTouched);
+        if (!formIsValid) return;
+        fetchGetUser(login, password, userToken, navigation, setAuthentication);
+        // if (!loginResponse) {
+        //     console.log("CHUJ")
+        //     return
+        // }
+        // navigation('/mainpage');
+        // clearInputsLogin(setLogin, setPassword);
+        // setTouchedFalseLogin(setLoginTouched, setPasswordTouched);
     };
 
     return (
@@ -114,6 +123,11 @@ export const Login = (props) => {
                             Pole nie może być puste!
                         </p>
                     )}
+                    {!authentication && (
+                        <p className={`${styles.validate_error}`}>
+                            Niepoprawny login/e-mail lub hasło!
+                        </p>
+                    )}
 
                     <button
                         className={`${styles.text_smaller} ${styles.remind}`}
@@ -140,10 +154,7 @@ export const Login = (props) => {
                 </form>
                 <span className={styles.line}></span>
                 <p className={styles.text_bigger}>Nie posiadasz konta?</p>
-                <LinkRounded
-                    text="Zarejestruj się"
-                    to="/register"
-                />
+                <LinkRounded text="Zarejestruj się" to="/register" />
                 <Link
                     to="/mainpage"
                     className={`${styles.text_smaller} ${styles.guest}`}

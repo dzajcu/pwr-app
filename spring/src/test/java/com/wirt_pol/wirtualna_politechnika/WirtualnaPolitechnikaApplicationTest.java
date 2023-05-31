@@ -112,7 +112,7 @@ public class WirtualnaPolitechnikaApplicationTest {
 
         Role role = Role.builder()
                 .role("JIMBRO")
-        .build();
+                .build();
 
         Role savedRole = roleService.saveRole(role);
         Long roleId = savedRole.getId();
