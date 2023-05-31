@@ -1,14 +1,16 @@
 export const fetchPostContent = (post, tags) => {
+	const token = sessionStorage.getItem('userToken')
+	console.log(token)
 	fetch('http://localhost:8080/content', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
+			Authorization: 'Bearer ' + sessionStorage.getItem('userToken'),
 		},
 		body: JSON.stringify({
 			title: 'Title',
 			description: post,
 			tags: tags,
-			creationTime: '',
 		}),
 	})
 		.then(response => {

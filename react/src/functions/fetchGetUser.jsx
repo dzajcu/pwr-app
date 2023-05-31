@@ -1,8 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
 
-
-export const fetchGetUser = (username, password, userToken, navigation, setAuthentication) => {
-
+export const fetchGetUser = async (username, password, setAuthentication, navigation) => {
 	fetch('http://localhost:8080/user/auth/authenticate', {
 		method: 'POST',
 		headers: {
@@ -15,14 +13,14 @@ export const fetchGetUser = (username, password, userToken, navigation, setAuthe
 	})
 		.then(response => {
 			if (!response.ok) {
-				setAuthentication(false);
+				setAuthentication(false)
 				throw new Error('Network respone was not ok')
 			}
 			return response.json()
 		})
 		.then(data => {
-			userToken = data;
-			navigation('/mainpage');
+			sessionStorage.setItem('userToken', data.token)
+			navigation('/mainpage')
 		})
 		.catch(error => {
 			console.error('There was a problem with the fetch operation:', error)
