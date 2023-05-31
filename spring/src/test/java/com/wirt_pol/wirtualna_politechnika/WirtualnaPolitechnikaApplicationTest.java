@@ -112,12 +112,12 @@ public class WirtualnaPolitechnikaApplicationTest {
 
         Role role = Role.builder()
                 .role("JIMBRO")
-        .build();
+                .build();
 
         Role savedRole = roleService.saveRole(role);
         Long roleId = savedRole.getId();
 
-        ResponseEntity<?> response = userService.assignRoleToUser(userId, roleId);
+        ResponseEntity<?> response = userService.assignRoleToUser(userId.toString(), roleId.toString());
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
