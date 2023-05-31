@@ -37,8 +37,23 @@ export const MainPage = props => {
 			</section>
 			<section className={`${styles.right} ${styles.side}`}>
 				<div className={`${styles.buttons}`}>
-					<LinkRounded style={{ backgroundColor: 'black', color: 'white' }} to='/login' text='Zaloguj się' />
-					<LinkRounded to='/register' text='Zarejestruj się' />
+					{console.log(sessionStorage.getItem('userToken') === null)}
+					{sessionStorage.getItem('userToken') === null ? (
+						<>
+							<LinkRounded style={{ backgroundColor: 'black', color: 'white' }} to='/login' text='Zaloguj się' />
+							<LinkRounded to='/register' text='Zarejestruj się' />
+						</>
+					) : (
+						<LinkRounded
+							style={{ backgroundColor: 'black', color: 'white', maxWidth: 150 }}
+							to='/'
+							text='Wyloguj się'
+							onClick={() => {
+								sessionStorage.removeItem('userToken')
+								console.log(sessionStorage.getItem('userToken'))
+							}}
+						/>
+					)}
 				</div>
 			</section>
 		</div>

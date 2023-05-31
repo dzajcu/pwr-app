@@ -3,6 +3,7 @@ export const fetchGetContent = setPosts => {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
+			Authorization: 'Bearer ' + sessionStorage.getItem('userToken'),
 		},
 	})
 		.then(response => {

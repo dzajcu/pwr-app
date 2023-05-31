@@ -1,8 +1,7 @@
 export const fetchPostContent = (post, tags) => {
-	const token = sessionStorage.getItem('userToken')
-	console.log(token)
 	fetch('http://localhost:8080/content', {
 		method: 'POST',
+		mode: 'cors',
 		headers: {
 			'Content-Type': 'application/json',
 			Authorization: 'Bearer ' + sessionStorage.getItem('userToken'),
@@ -15,6 +14,8 @@ export const fetchPostContent = (post, tags) => {
 	})
 		.then(response => {
 			if (!response.ok) {
+				sessionStorage.removeItem('userToken')
+				console.log(sessionStorage.getItem('userToken'))
 				throw new Error('Network response was not ok')
 			}
 			return response.json()
