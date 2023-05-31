@@ -1,13 +1,12 @@
 package com.wirt_pol.wirtualna_politechnika.DTO;
 
+import com.wirt_pol.wirtualna_politechnika.entity.User;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import com.wirt_pol.wirtualna_politechnika.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.context.annotation.Bean;
 
 @Getter
 @Setter
