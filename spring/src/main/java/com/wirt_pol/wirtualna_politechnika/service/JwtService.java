@@ -41,12 +41,17 @@ public class JwtService{
     }
 
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails){
+        //Wartosci czasowe dla ważności tokenu
+        int seconds = 0;
+        int minutes = 30;
+        int hours = 0;
+        int time = ((1000 * seconds) + (1000 * 60 * minutes) + (1000 * 60 * 60 * hours));
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+1000*60*24))
+                .setExpiration(new Date(System.currentTimeMillis()+time))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

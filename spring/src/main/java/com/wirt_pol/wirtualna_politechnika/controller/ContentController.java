@@ -1,5 +1,6 @@
 package com.wirt_pol.wirtualna_politechnika.controller;
 
+import com.wirt_pol.wirtualna_politechnika.DTO.ContentDTO;
 import com.wirt_pol.wirtualna_politechnika.entity.Content;
 import com.wirt_pol.wirtualna_politechnika.service.ContentService;
 import jakarta.validation.Valid;
@@ -16,13 +17,21 @@ public class ContentController {
     ContentService contentService;
 
     @GetMapping("/content")
-    public List<Content> fetchContentList(){
+    public List<ContentDTO> fetchContentList(){
         return contentService.fetchContentList();
     }
 
-    @GetMapping("/content/{id}")
-    public Content fetchContentById(@PathVariable Long id){
+    @GetMapping("/content/id/{id}")
+    public ContentDTO fetchContentById(@PathVariable Long id){
         return contentService.fetchContentById(id);
+    }
+    @GetMapping("/content/page/{id}")
+    public List<ContentDTO> fetchContentByPage(@PathVariable int id){
+        return contentService.fetchContentByPage(id);
+    }
+    @GetMapping("/content/tag/{tag}")
+    public List<ContentDTO> fetchContentByTag(@PathVariable String tag){
+        return contentService.fetchContentByTag(tag);
     }
     @PostMapping("/content")
     public ResponseEntity<Content> createContent(@Valid @RequestBody Content content){
