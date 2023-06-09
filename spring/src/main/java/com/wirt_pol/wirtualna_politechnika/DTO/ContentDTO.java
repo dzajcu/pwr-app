@@ -1,7 +1,6 @@
 package com.wirt_pol.wirtualna_politechnika.DTO;
 
 import com.wirt_pol.wirtualna_politechnika.entity.Content;
-import com.wirt_pol.wirtualna_politechnika.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

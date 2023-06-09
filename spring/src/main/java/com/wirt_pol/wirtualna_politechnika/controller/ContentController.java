@@ -4,7 +4,6 @@ import com.wirt_pol.wirtualna_politechnika.DTO.ContentDTO;
 import com.wirt_pol.wirtualna_politechnika.entity.Content;
 import com.wirt_pol.wirtualna_politechnika.service.ContentService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -13,8 +12,12 @@ import java.util.List;
 @RestController
 
 public class ContentController {
-    @Autowired
-    ContentService contentService;
+
+    private final ContentService contentService;
+
+    public ContentController(ContentService contentService) {
+        this.contentService = contentService;
+    }
 
     @GetMapping("/content")
     public List<ContentDTO> fetchContentList(){

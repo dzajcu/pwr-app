@@ -7,7 +7,6 @@ import com.wirt_pol.wirtualna_politechnika.exception.optionalContentNotFoundExce
 import com.wirt_pol.wirtualna_politechnika.repository.ContentRepository;
 import com.wirt_pol.wirtualna_politechnika.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -64,6 +63,7 @@ public class ContentServiceImpl implements ContentService {
 @Override
     public List<ContentDTO> fetchContentByTag(String prefix){
         List<ContentDTO> contentList = fetchContentList();
+        prefix = "#"+prefix;
         List<ContentDTO> filteredByTags = new ArrayList<>();
         for (ContentDTO content : contentList){
             List<String> tags = content.getTags();
