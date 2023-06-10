@@ -40,6 +40,10 @@ public class ContentController {
     public ResponseEntity<Content> createContent(@Valid @RequestBody Content content){
         return contentService.createContent(content);
     }
+    @PutMapping("/content/edit/{id}")
+    public String editContent(@Valid @RequestBody Content content, @PathVariable Long id ){
+        return contentService.editContent(content, id);
+    }
     @DeleteMapping("/user/{id}")
     public void deleteContentById(@PathVariable("id") Long contentId){
         contentService.deleteContentById(contentId);

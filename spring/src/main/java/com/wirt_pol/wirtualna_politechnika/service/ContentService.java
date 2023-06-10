@@ -14,6 +14,7 @@ public interface ContentService {
     List<ContentDTO> fetchContentByPage(int startRow);
     List<ContentDTO> fetchContentList();
     ContentDTO fetchContentById(Long contentId);
+    String editContent(Content content, Long contentId);
 
     //Sprawdzić update ze zmianą tagów
     //Content updateContent(Content content, Long contentId);

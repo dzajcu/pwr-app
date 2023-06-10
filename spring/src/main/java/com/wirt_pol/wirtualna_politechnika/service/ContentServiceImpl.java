@@ -85,5 +85,16 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
+    public String editContent(Content newContent, Long oldContentId){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByUsername(authentication.getName()).orElseThrow(()->new UsernameNotFoundException("Not found"));
+        Content content = contentRepository.findById(oldContentId).orElseThrow(() -> new optionalContentNotFoundException(oldContentId));
+        content.setTags(newContent.getTags());
+        content.setAuthor(user);
+        content.setDescription(newContent.getDescription());
+        contentRepository.save(content);
+        return "Updated succesfully";
+    }
+    @Override
     public void deleteContentById(Long contentId){contentRepository.deleteById(contentId);}
 }
