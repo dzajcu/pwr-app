@@ -27,4 +27,3 @@ public class MainPageServiceImpl implements MainPageService{
         }
     };
 }
-//http://ip-api.com/json/178.43.116.58?fields=countryCode
