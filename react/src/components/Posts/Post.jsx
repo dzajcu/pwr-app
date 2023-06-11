@@ -13,7 +13,7 @@ export const Post = props => {
 		<div className={styles.post}>
 			<div className={styles.content}>
 				<div className={styles.post_header}>
-					<p className={styles.username}>Username</p>
+					<p className={styles.username}>{props.username}</p>
 					<div className={styles.dot}></div>
 					<p className={styles.date}>{formattedDateTime}</p>
 				</div>

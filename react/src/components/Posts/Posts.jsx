@@ -11,6 +11,7 @@ export const Posts = (props) => {
                         date={post.creationTime}
                         text={post.description}
                         tags={post.tags}
+                        username={post.author}
                     />
                 ))
                 .reverse()}
