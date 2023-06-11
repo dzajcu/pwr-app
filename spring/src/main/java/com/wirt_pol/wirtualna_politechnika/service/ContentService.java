@@ -21,8 +21,7 @@ public interface ContentService {
 
     String editContent(Content content, Long contentId);
 
-    //Sprawdzić update ze zmianą tagów
-    //Content updateContent(Content content, Long contentId);
+    List<String> getMostRepeatingTagsWithPrefix(String prefix);
 
     void deleteContentById(Long contentId);
 }

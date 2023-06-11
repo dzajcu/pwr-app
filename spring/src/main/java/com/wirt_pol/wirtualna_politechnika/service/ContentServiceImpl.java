@@ -17,9 +17,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -41,7 +40,7 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public List<ContentDTO> fetchContentByPage(int page) {
         int pageSize = 15;
-        Pageable pageable = PageRequest.of(page-1, pageSize, Sort.by("creationTime").descending());
+        Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("creationTime").descending());
         List<Content> contentList = contentRepository.findAll(pageable).getContent();
         List<ContentDTO> dtoList = new ArrayList<>();
         for (Content content : contentList) {
@@ -67,7 +66,6 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public List<ContentDTO> fetchContentByTag(String prefix) {
         List<ContentDTO> contentList = fetchContentList();
-        prefix = "#" + prefix;
         List<ContentDTO> filteredByTags = new ArrayList<>();
         for (ContentDTO content : contentList) {
             List<String> tags = content.getTags();
@@ -103,5 +101,28 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public void deleteContentById(Long contentId) {
         contentRepository.deleteById(contentId);
+    }
+
+    public List<String> getMostRepeatingTagsWithPrefix(String prefix) {
+        List<Content> contentList = (List<Content>) contentRepository.findAll();
+        Map<String, Integer> tagCountMap = new HashMap<>();
+
+        for (Content content : contentList) {
+            for (String tag : content.getTags()) {
+                if (tag.contains(prefix)) {
+                    tagCountMap.put(tag, tagCountMap.getOrDefault(tag, 0) + 1);
+                }
+            }
+        }
+
+        List<Map.Entry<String, Integer>> sortedTagsByCount = new ArrayList<>(tagCountMap.entrySet());
+        sortedTagsByCount.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+
+        List<String> mostRepeatingTags = sortedTagsByCount.stream()
+                .limit(5)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+
+        return mostRepeatingTags;
     }
 }

@@ -36,6 +36,10 @@ public class ContentController {
     public List<ContentDTO> fetchContentByTag(@PathVariable String tag){
         return contentService.fetchContentByTag(tag);
     }
+    @GetMapping("/content/tag/repeated/{tag}")
+    public List<String> fetchMost5AppearingTags(@PathVariable String tag){
+        return contentService.getMostRepeatingTagsWithPrefix(tag);
+    }
     @PostMapping("/content")
     public ResponseEntity<Content> createContent(@Valid @RequestBody Content content){
         return contentService.createContent(content);
@@ -48,4 +52,5 @@ public class ContentController {
     public void deleteContentById(@PathVariable("id") Long contentId){
         contentService.deleteContentById(contentId);
     }
+
 }
