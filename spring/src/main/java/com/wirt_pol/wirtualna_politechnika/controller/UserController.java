@@ -18,12 +18,12 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/users")
-    public User saveUser(@Valid @RequestBody User user){
+    public User saveUser(@Valid @RequestBody User user) {
         return userService.saveUser(user);
     }
 
     @GetMapping("/users")
-    public List<User> fetchUserList(){
+    public List<User> fetchUserList() {
         return userService.fetchUserList();
     }
 
@@ -33,17 +33,17 @@ public class UserController {
     }
 
     @PutMapping("/users/{id}")
-    public User updateUser(@RequestBody User user, @PathVariable("id") Long userId){
+    public User updateUser(@RequestBody User user, @PathVariable("id") Long userId) {
         return userService.updateUser(user, userId);
     }
 
     @DeleteMapping("/users/{id}")
-    public String deleteUserById(@PathVariable("id") Long userId){
+    public String deleteUserById(@PathVariable("id") Long userId) {
         return userService.deleteUserById(userId);
     }
 
     @PutMapping("/users/{userId}/roles/{roleId}")
-    public ResponseEntity<?> assignRoleToUser(@PathVariable String userName, @PathVariable String roleName){
+    public ResponseEntity<?> assignRoleToUser(@PathVariable String userName, @PathVariable String roleName) {
         return userService.assignRoleToUser(userName, roleName);
     }
 

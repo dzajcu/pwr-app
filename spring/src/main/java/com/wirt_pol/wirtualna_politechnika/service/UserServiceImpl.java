@@ -1,5 +1,5 @@
 package com.wirt_pol.wirtualna_politechnika.service;
-import java.util.Optional;
+
 import com.wirt_pol.wirtualna_politechnika.entity.Role;
 import com.wirt_pol.wirtualna_politechnika.entity.User;
 import com.wirt_pol.wirtualna_politechnika.exception.roleNotFoundException;
@@ -10,9 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
@@ -22,12 +23,12 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User saveUser(User user){
+    public User saveUser(User user) {
         return userRepository.save(user);
     }
 
     @Override
-    public List<User> fetchUserList(){
+    public List<User> fetchUserList() {
         return (List<User>) userRepository.findAll();
     }
 
@@ -38,36 +39,35 @@ public class UserServiceImpl implements UserService{
     }
 
     //Sprawdzenie czy 2 podane stringi są różne od siebie i czy 2 string nie jest pusty
-    public boolean stringNotEmptyOrEqual(String str1 , String str2){
+    public boolean stringNotEmptyOrEqual(String str1, String str2) {
         return !(str1.equalsIgnoreCase(str2) && str2.equals(""));
     }
 
     //Funkcja zmiany nazwy użytkownika dla nowej nazwy użytkownika jeśli została ona zmieniona
-    public void changeUnIfNotEmpty(User oldUser, User newUser){
+    public void changeUnIfNotEmpty(User oldUser, User newUser) {
         String oldUsername = oldUser.getUsername(), newUserName = newUser.getUsername();
-        if (stringNotEmptyOrEqual(oldUsername, newUserName)){
-            oldUser.setUsername(newUserName);}
+        if (stringNotEmptyOrEqual(oldUsername, newUserName)) {
+            oldUser.setUsername(newUserName);
+        }
     }
 
     //Funkcja zmiany maila użytkownika dla nowego maila jeśli został zmieniony
-    public void changeMailIfNotEmpty(User oldUser, User newUser)
-    {
+    public void changeMailIfNotEmpty(User oldUser, User newUser) {
         String oldMail = oldUser.getEmail(), newMail = newUser.getEmail();
-        if(stringNotEmptyOrEqual(oldMail,newMail))
+        if (stringNotEmptyOrEqual(oldMail, newMail))
             oldUser.setEmail(newMail);
     }
 
     //Funckja zmieniająca hasło użytkownika jeśli to zostało zmienione
-    public void changePasswIfNotEmpty(User oldUser, User newUser)
-    {
+    public void changePasswIfNotEmpty(User oldUser, User newUser) {
         String oldPassw = oldUser.getPassword(), newPassw = newUser.getPassword();
-        if(stringNotEmptyOrEqual(oldPassw,newPassw))
+        if (stringNotEmptyOrEqual(oldPassw, newPassw))
             oldUser.setPassword(newPassw);
     }
 
     //Aktualizowanie danych użytkownika
     @Override
-    public User updateUser(User user, Long userId){
+    public User updateUser(User user, Long userId) {
 
         User usDB = userRepository.findById(userId).get();
         changeUnIfNotEmpty(usDB, user);
@@ -78,8 +78,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public String deleteUserById(Long Id){
-        if(userRepository.existsById(Id)) {
+    public String deleteUserById(Long Id) {
+        if (userRepository.existsById(Id)) {
             userRepository.deleteById(Id);
             return "Deleted successfully";
         }
@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public ResponseEntity<?> assignRoleToUser(String userName, String roleName){
+    public ResponseEntity<?> assignRoleToUser(String userName, String roleName) {
         User user = userRepository.findByUsername(userName).orElseThrow(() -> new userNotFoundException(0L));
         Role role = roleRepository.findByRole(roleName).orElseThrow(() -> new roleNotFoundException(0L));
         assert user != null;
@@ -97,6 +97,7 @@ public class UserServiceImpl implements UserService{
         roleRepository.save(role);
         return ResponseEntity.ok().build();
     }
+
     @Override
     public Optional<User> fetchUserByUsername(String username) {
         return userRepository.findByUsername(username);

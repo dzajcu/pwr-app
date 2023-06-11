@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-@Table (name = "content")
+@Table(name = "content")
 public class Content {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,11 +32,11 @@ public class Content {
     @ElementCollection
     private List<String> tags = new ArrayList<>();
 
-    @Column (name = "when_created")
+    @Column(name = "when_created")
     @CreationTimestamp
     private LocalDateTime creationTime;
 
-    @ManyToOne (fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     @JsonBackReference
     private User author;

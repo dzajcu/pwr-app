@@ -49,6 +49,3 @@ public class ContentController {
         contentService.deleteContentById(contentId);
     }
 }
-//TODO Zedytowac fetchowanie contentu tak aby wyswietlal sie user
-//TODO PutMapping dla contentu
-//TODO Zwracanie contentu po tagach

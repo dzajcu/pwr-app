@@ -18,16 +18,17 @@ public class EventDTO {
     private String eventStartDate;
     private String eventImageUrl;
 
-    private String chooseImageUrl(Event event){
+    private String chooseImageUrl(Event event) {
         List<Event.Image> imageList = event.getImages();
-        for(Event.Image image : imageList){
-            if(Integer.parseInt(image.getHeight()) == 1024
+        for (Event.Image image : imageList) {
+            if (Integer.parseInt(image.getHeight()) == 1024
                     && Integer.parseInt(image.getWidth()) == 512)
                 return image.getUrl();
         }
         return imageList.get(0).getUrl();
     }
-    public EventDTO toEntity(Event event){
+
+    public EventDTO toEntity(Event event) {
         this.setEventName(event.getName());
         this.setEventStartDate(event.getDates().getStart().getLocalDate());
         this.setEventStartTime(event.getDates().getStart().getLocalTime());

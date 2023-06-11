@@ -7,5 +7,5 @@ import java.util.List;
 
 @Service
 public interface ApiService {
-   List<EventDTO> getEventList();
+    List<EventDTO> getEventList();
 }

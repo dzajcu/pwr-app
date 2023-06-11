@@ -15,15 +15,22 @@ public class RoleController {
     RoleService roleService;
 
     @PostMapping("/roles")
-    public Role saveRole(@Valid @RequestBody Role role) {return roleService.saveRole(role);}
-    @GetMapping ("/roles")
-    public List<Role> fetchRoleList(){return roleService.fetchRoleList();}
+    public Role saveRole(@Valid @RequestBody Role role) {
+        return roleService.saveRole(role);
+    }
+
+    @GetMapping("/roles")
+    public List<Role> fetchRoleList() {
+        return roleService.fetchRoleList();
+    }
+
     @GetMapping("roles/{id}")
-    public Role fetchRoleById(@PathVariable Long id){
+    public Role fetchRoleById(@PathVariable Long id) {
         return roleService.fetchRoleById(id);
     }
+
     @PutMapping("/roles/{id}")
-    public Role updateRole(@RequestBody Role role, @PathVariable("id") Long roleId){
+    public Role updateRole(@RequestBody Role role, @PathVariable("id") Long roleId) {
         return roleService.updateRole(role, roleId);
     }
 }

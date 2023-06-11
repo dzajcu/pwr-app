@@ -30,19 +30,21 @@ public class Event {
         private String height;
         private boolean fallback;
     }
+
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Date{
+    public static class Date {
         public Start start;
+
         @Getter
         @Setter
         @NoArgsConstructor
         @AllArgsConstructor
         @JsonIgnoreProperties(ignoreUnknown = true)
-        public static class Start{
+        public static class Start {
             public String localDate;
             public String localTime;
         }

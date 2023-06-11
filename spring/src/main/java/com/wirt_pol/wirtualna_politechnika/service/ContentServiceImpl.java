@@ -28,27 +28,33 @@ public class ContentServiceImpl implements ContentService {
     private final UserRepository userRepository;
 
     @Override
-    public ResponseEntity<Content> createContent(Content content){
+    public ResponseEntity<Content> createContent(Content content) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.findByUsername(authentication.getName()).orElseThrow(()->new UsernameNotFoundException("Not found"));
+        User user = userRepository.findByUsername(authentication.getName()).orElseThrow(() -> new UsernameNotFoundException("Not found"));
         content.setCreationTime(LocalDateTime.now());
         content.setAuthor(user);
         Content savedContent = contentRepository.save(content);
         user.getUserPosts().add(savedContent);
         return ResponseEntity.ok(savedContent);
     }
+
     @Override
     public List<ContentDTO> fetchContentByPage(int page) {
-     Pageable pageable = PageRequest.of(page-1,15, Sort.by("Id").ascending());
-     List<Content> contentList = contentRepository.findAll(pageable).getContent();
-     List<ContentDTO> dtoList = new ArrayList<>();
-     for (Content content : contentList){
-         ContentDTO dto = new ContentDTO(content.getDescription(),
-                 content.getCreationTime(), content.getTags(), content.getAuthor().getUsername());
-         dtoList.add(dto);
-     }
-     return dtoList;
+        int pageSize = 15;
+        long totalContentCount = contentRepository.count();
+        int totalPages = (int) Math.ceil((double) totalContentCount / pageSize);
+        int reversePageIndex = totalPages - page;
+        Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("Id").descending());
+        List<Content> contentList = contentRepository.findAll(pageable).getContent();
+        List<ContentDTO> dtoList = new ArrayList<>();
+        for (Content content : contentList) {
+            ContentDTO dto = new ContentDTO(content.getDescription(),
+                    content.getCreationTime(), content.getTags(), content.getAuthor().getUsername());
+            dtoList.add(dto);
+        }
+        return dtoList;
     }
+
     @Override
     public List<ContentDTO> fetchContentList() {
         List<Content> contentList = (List<Content>) contentRepository.findAll();
@@ -60,15 +66,16 @@ public class ContentServiceImpl implements ContentService {
         }
         return dtoList;
     }
-@Override
-    public List<ContentDTO> fetchContentByTag(String prefix){
+
+    @Override
+    public List<ContentDTO> fetchContentByTag(String prefix) {
         List<ContentDTO> contentList = fetchContentList();
-        prefix = "#"+prefix;
+        prefix = "#" + prefix;
         List<ContentDTO> filteredByTags = new ArrayList<>();
-        for (ContentDTO content : contentList){
+        for (ContentDTO content : contentList) {
             List<String> tags = content.getTags();
-            for (String tag : tags){
-                if(tag.toLowerCase().startsWith(prefix.toLowerCase())){
+            for (String tag : tags) {
+                if (tag.toLowerCase().startsWith(prefix.toLowerCase())) {
                     filteredByTags.add(content);
                     break;
                 }
@@ -78,16 +85,16 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
-    public ContentDTO fetchContentById(Long contentId){
+    public ContentDTO fetchContentById(Long contentId) {
         Optional<Content> optionalContent = contentRepository.findById(contentId);
         Content content = optionalContent.orElseThrow(() -> new optionalContentNotFoundException(contentId));
         return ContentDTO.fromContent(content);
     }
 
     @Override
-    public String editContent(Content newContent, Long oldContentId){
+    public String editContent(Content newContent, Long oldContentId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.findByUsername(authentication.getName()).orElseThrow(()->new UsernameNotFoundException("Not found"));
+        User user = userRepository.findByUsername(authentication.getName()).orElseThrow(() -> new UsernameNotFoundException("Not found"));
         Content content = contentRepository.findById(oldContentId).orElseThrow(() -> new optionalContentNotFoundException(oldContentId));
         content.setTags(newContent.getTags());
         content.setAuthor(user);
@@ -95,6 +102,9 @@ public class ContentServiceImpl implements ContentService {
         contentRepository.save(content);
         return "Updated succesfully";
     }
+
     @Override
-    public void deleteContentById(Long contentId){contentRepository.deleteById(contentId);}
+    public void deleteContentById(Long contentId) {
+        contentRepository.deleteById(contentId);
+    }
 }
