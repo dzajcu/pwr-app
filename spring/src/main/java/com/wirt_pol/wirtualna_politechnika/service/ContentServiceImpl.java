@@ -43,8 +43,8 @@ public class ContentServiceImpl implements ContentService {
         int pageSize = 15;
         long totalContentCount = contentRepository.count();
         int totalPages = (int) Math.ceil((double) totalContentCount / pageSize);
-        int reversePageIndex = totalPages - page;
-        Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("Id").descending());
+        int reversePageIndex = totalPages - page + 1;
+        Pageable pageable = PageRequest.of(reversePageIndex, pageSize, Sort.by("Id").descending());
         List<Content> contentList = contentRepository.findAll(pageable).getContent();
         List<ContentDTO> dtoList = new ArrayList<>();
         for (Content content : contentList) {
