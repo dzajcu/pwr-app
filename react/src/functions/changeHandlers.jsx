@@ -24,3 +24,7 @@ export const loginInputChangeHandler = (e, setLogin) => {
 export const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 };
+
+export const refreshPostsHandler = (setRefreshPosts) => {
+    setRefreshPosts((prevState) => !prevState);
+};
