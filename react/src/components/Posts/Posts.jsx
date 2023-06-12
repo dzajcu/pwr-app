@@ -14,7 +14,7 @@ export const Posts = (props) => {
                         username={post.author}
                     />
                 ))
-                .reverse()}
+                }
         </div>
     );
 };

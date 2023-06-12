@@ -10,12 +10,30 @@ import { LinkRounded } from "../reusable/LinkRounded";
 
 export const MainPage = (props) => {
     const [postUpdates, setPostUpdates] = useState(0);
+    const [pageId, setPageId] = useState(1);
     const [posts, setPosts] = useState([]);
 
-    useEffect(() => {
-			fetchGetContent(setPosts);
-	}, [postUpdates]);
 
+    const handleScroll = () => {
+        const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+        if (scrollTop + clientHeight === scrollHeight) {
+            setPageId(prevPageId => prevPageId + 1);
+        }
+    };
+    
+    useEffect(() => {
+        fetchGetContent(setPosts, pageId);
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [postUpdates, pageId]);
+    
+
+    const handlePostSubmit = () => {
+        setPostUpdates((prevCount) => prevCount + 1);
+    };
+    
     return (
         <div className={styles.container}>
             <section className={`${styles.left} ${styles.side}`}>
@@ -38,7 +56,7 @@ export const MainPage = (props) => {
             </section>
             <section className={styles.posts}>
                 <SearchBar />
-                <PostForm setPostUpdates={setPostUpdates} />
+                <PostForm setPostUpdates={handlePostSubmit} />
                 <Posts postsList={posts} />
             </section>
             <section className={`${styles.right} ${styles.side}`}>
