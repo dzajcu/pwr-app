@@ -1,4 +1,3 @@
-@charset "UTF-8";
 .container {
   display: flex;
   justify-content: center;
@@ -8,15 +7,17 @@
 }
 
 .side {
-  position: sticky; /* dodaj pozycję sticky */
-  top: 0; /* ustaw pozycję */
+  position: sticky;
+  top: 0;
   overflow: hidden;
-  max-width: 20%;
   width: 20%;
-  height: 100%;
-  width: 25%;
-  height: 50vh;
-  min-height: 200px;
+  height: 100vh;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
 }
 
 .logo {
@@ -48,4 +49,8 @@
   margin: 1rem;
   margin-left: 1.5rem;
   gap: 1rem;
+}
+
+.event_cards {
+  margin-top: 8rem;
 }/*# sourceMappingURL=MainPage.module.css.map */

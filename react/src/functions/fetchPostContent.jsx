@@ -16,7 +16,6 @@ export const fetchPostContent = async (post, tags) => {
 
 		if (!response.ok) {
 			sessionStorage.removeItem('userToken');
-			console.log(sessionStorage.getItem('userToken'));
 			throw new Error('Network response was not ok');
 		}
 

@@ -1,8 +1,9 @@
-.post {
-    margin-top: 3rem;
-    padding: 2rem 3rem;
+.card {
+    margin: 1.5rem 1rem 0 1rem;
+    padding: 1rem 1.2rem;
     font-size: 1.4rem;
     // color: white;
+    width: 80%;
 
     background: rgba(255, 255, 255, 0.03);
     border-radius: 16px;
@@ -10,32 +11,30 @@
     backdrop-filter: blur(7.4px);
     -webkit-backdrop-filter: blur(7.4px);
     border: 1px solid rgba(255, 255, 255, 0.13);
+    align-self: flex-end;
 }
 
-.post_header {
+.event_cards {
+    display: flex;
+    flex-direction: column;
+}
+
+.date_container {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
-.username {
+.eventname {
     font-weight: bold;
-}
-
-.dot {
-    margin-left: 1.5rem;
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background-color: rgba(87, 85, 85, 0.884);
+    text-transform: uppercase;
+    font-size: 1rem
 }
 
 .date {
-
-    // margin-top: 0.1rem;
-    margin-left: .5rem;
     font-weight: bold;
     color: rgb(87, 85, 85);
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .content {
@@ -55,4 +54,10 @@
     margin-right: 0.3rem;
     font-style: italic;
     color: rgb(50, 43, 117);
+}
+
+.card_img {
+    border-radius: 10px;
+    height: 9rem;
+    object-fit: cover;
 }

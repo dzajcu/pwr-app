@@ -17,12 +17,13 @@ export const PostForm = ({ setPostUpdates }) => {
             .filter((word) => word[0] === "#" && word.length > 2)
             .map((word) => word.substring(1));
         await fetchPostContent(post, tags);
-        setPostUpdates();
-        setPost("");
-        setCharacters(1000);
+        // setPostUpdates();
+        // setPost("");
+        // setCharacters(1000);
+        window.location.reload();
     };
 
-    const isButtonDisabled = post === "";
+    const isButtonDisabled = post === "" || sessionStorage.getItem("userToken") === null;
 
     return (
         <div className="container">

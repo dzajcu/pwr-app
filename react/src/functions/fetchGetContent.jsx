@@ -13,7 +13,18 @@ export const fetchGetContent = (setPosts, id) => {
             return response.json();
         })
         .then((data) => {
-            setPosts(prevPosts => [...prevPosts, ...data]);
+            setPosts((prevPosts) => {
+                const newPosts = data.filter(
+                    (newPost) =>
+                        !prevPosts.some(
+                            (prevPost) =>
+                                prevPost.creationTime ===
+                                    newPost.creationTime &&
+                                prevPost.author === newPost.author
+                        )
+                );
+                return [...prevPosts, ...newPosts];
+            });
         })
         .catch((error) => {
             console.error(
